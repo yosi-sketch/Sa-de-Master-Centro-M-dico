@@ -25,38 +25,51 @@ import {
   ShieldCheck,
   FileText,
   BadgeCheck,
+  Smile,
+  Users,
+  Eye,
+  Brain,
+  Baby,
+  Bone,
+  Check,
 } from "lucide-react";
 import GlowingButton from "./components/GlowingButton";
 
-// Contatos & Dados Cadastrais Oficiais do Núcleo Cardiológico Integrado
-const WHATSAPP_NUMBER = "5531989885541";
-const PHONE_DISPLAY = "(31) 98988-5541";
-const PHONE_FIXO_DISPLAY = "(31) 3535-1014";
-const EMAIL_CONTACT = "contato@nucleocardiologico.com.br";
-const INSTAGRAM_URL = "https://www.instagram.com/nucleocardiologico/";
-const INSTAGRAM_HANDLE = "@nucleocardiologico";
+// Contatos & Dados Oficiais do Saúde Master Centro Médico
+const WHATSAPP_NUMBER = "5531996196155";
+const WHATSAPP_NUMBER_SEC = "5531999922456";
+const PHONE_DISPLAY = "(31) 9 9619-6155";
+const PHONE_SEC_DISPLAY = "(31) 9 9992-2456";
+const PHONE_FIXO_DISPLAY = "(31) 3535-2459";
+const EMAIL_CONTACT = "contato@saudemasterce.com.br";
+const INSTAGRAM_URL = "https://www.instagram.com/saudemasterce/";
+const INSTAGRAM_HANDLE = "@saudemasterce";
 
-const CLINIC_NAME = "Núcleo Cardiológico Integrado";
+const CLINIC_NAME = "Saúde Master Centro Médico";
+const CLINIC_TAGLINE = "Envelhecer bem é viver com autonomia.";
 
 const ADDRESS_TEXT =
-  "R. Dr. Tomás de Andrade, 139, Centro, Mateus Leme - MG, 35670-000";
+  "Rua Dr. Tomás de Andrade, 686, Centro, Mateus Leme - MG, CEP 35670-000";
 
 const GOOGLE_REVIEWS_URL =
-  "https://www.google.com/maps/search/?api=1&query=Nucleo+Cardiologico+Integrado+Mateus+Leme";
+  "https://www.google.com/maps/search/?api=1&query=Saude+Master+Centro+Medico+Mateus+Leme";
 const GOOGLE_MAPS_URL =
-  "https://www.google.com/maps/search/?api=1&query=R.+Dr.+Tom%C3%A1s+de+Andrade%2C+139%2C+Centro%2C+Mateus+Leme+-+MG%2C+35670-000";
+  "https://www.google.com/maps/search/?api=1&query=Rua+Dr.+Tom%C3%A1s+de+Andrade%2C+686%2C+Centro%2C+Mateus+Leme+-+MG%2C+35670-000";
 
-const LOGO_SRC = "/logo.png";
-const LOGO_SYMBOL_SRC = "/logo-symbol.png";
+const LOGO_SRC = "/logo-saude-master.png";
+const LOGO_SYMBOL_SRC = "/logo-saude-master-symbol.png";
+const SENIORS_SRC = "/idosos-autonomia.jpg";
+const FLYER_SRC = "/campanha-envelhecer-bem.jpg";
 const FACHADA_SRC = "/fachada-clinica.jpg";
 const RECEPCAO_SRC = "/recepcao-clinica.jpg";
+const INTERIOR_SRC = "/clinica-interior.jpg";
 
 function getWhatsAppUrl(
   message?: string,
   number: string = WHATSAPP_NUMBER
 ) {
   const defaultText =
-    "Olá! Gostaria de agendar uma consulta / exame no Núcleo Cardiológico Integrado em Mateus Leme.";
+    "Olá! Gostaria de agendar uma consulta / atendimento no Saúde Master Centro Médico em Mateus Leme.";
   return `https://wa.me/${number}?text=${encodeURIComponent(
     message || defaultText
   )}`;
@@ -164,7 +177,8 @@ export default function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalSpecialty, setModalSpecialty] = useState<string>("Consulta Cardiológica Geral");
+  const [modalSpecialty, setModalSpecialty] = useState<string>("Consulta Geral");
+  const [showAllSpecialties, setShowAllSpecialties] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -174,323 +188,322 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const openConsultModal = (specialtyName = "Consulta Cardiológica") => {
+  const openConsultModal = (specialtyName = "Consulta Médica") => {
     setModalSpecialty(specialtyName);
     setModalOpen(true);
   };
 
   const closeMenu = () => setIsMenuOpen(false);
 
-  // Especialidades e Exames Cardiológicos Oficiais
+  // Especialidades Médicas do Saúde Master (Layout Leve, Moderno & Sintético com Cores Temáticas)
   const especialidades = [
     {
-      id: "consulta-cardiologica",
-      tag: "Prevenção & Avaliação Clínica",
-      name: "Consulta Cardiológica & Risco Cirúrgico",
+      id: "geriatria",
+      tag: "Longevidade Ativa",
+      name: "Geriatria & Maturidade",
+      icon: Smile,
+      badge: "Destaque",
+      desc: "Preservação da autonomia, vitalidade cognitiva e cuidado integral na maturidade.",
+      pills: ["Autonomia", "Cognição", "Mobilidade"],
+      iconStyle: "bg-emerald-50 text-emerald-600 border-emerald-200 group-hover:bg-emerald-600 group-hover:text-white",
+      tagColor: "text-emerald-700",
+      whatsappMsg:
+        "Olá! Gostaria de agendar uma consulta de Geriatria no Saúde Master Centro Médico em Mateus Leme.",
+    },
+    {
+      id: "clinica-medica",
+      tag: "Cuidado Abrangente",
+      name: "Clínica Médica Geral",
       icon: Stethoscope,
-      color: "from-[#01499a] to-[#013b7e]",
-      accentBg: "bg-sky-50 border-sky-200 text-[#01499a]",
-      description:
-        "Consulta minuciosa e humanizada com médico cardiologista. Investigação aprofundada de sintomas como dores no peito, palpitações, falta de ar e cansaço, além de laudo detalhado de risco cirúrgico pré-operatório.",
-      professionals: "Dr. Cleiterson & Corpo Clínico Especializado",
-      highlights: [
-        "Escuta atenta e consulta clínica sem pressa",
-        "Avaliação e liberação de risco cirúrgico pré-operatório",
-        "Investigação de histórico familiar e fatores de risco",
-        "Plano de cuidado preventivo individualizado",
-      ],
+      desc: "Avaliação preventiva completa, exames e acompanhamento contínuo da sua saúde.",
+      pills: ["Check-up", "Prevenção", "Rotina"],
+      iconStyle: "bg-sky-50 text-sky-600 border-sky-200 group-hover:bg-sky-600 group-hover:text-white",
+      tagColor: "text-sky-700",
       whatsappMsg:
-        "Olá! Gostaria de agendar uma consulta cardiológica no Núcleo Cardiológico Integrado em Mateus Leme.",
+        "Olá! Gostaria de agendar uma consulta de Clínica Médica no Saúde Master Centro Médico em Mateus Leme.",
     },
     {
-      id: "holter-24h",
-      tag: "Monitoramento Contínuo",
-      name: "Holter 24 Horas Digital",
+      id: "cardiologia",
+      tag: "Saúde Cardiovascular",
+      name: "Cardiologia & ECG",
       icon: HeartPulse,
-      color: "from-[#dd0101] to-[#b91c1c]",
-      accentBg: "bg-red-50 border-red-200 text-[#b91c1c]",
-      description:
-        "Gravação ininterrupta da atividade elétrica do coração durante 24 horas enquanto você realiza suas tarefas diárias e dorme. Essencial para detectar arritmias ocultas, extrassístoles e investigar tonturas ou desmaios.",
-      professionals: "Equipamento digital moderno com laudo cardiológico",
-      highlights: [
-        "Identificação precisa de arritmias e palpitações",
-        "Avaliação de síncope (desmaios) e tonturas inexplicadas",
-        "Monitoramento da eficácia de remédios para o coração",
-        "Aparelho leve, silencioso e confortável de usar",
-      ],
+      desc: "Diagnóstico precoce, controle da pressão arterial e exames de eletrocardiograma.",
+      pills: ["Hipertensão", "ECG", "Risco Cirúrgico"],
+      iconStyle: "bg-rose-50 text-rose-600 border-rose-200 group-hover:bg-rose-600 group-hover:text-white",
+      tagColor: "text-rose-700",
       whatsappMsg:
-        "Olá! Gostaria de agendar o exame Holter 24 Horas no Núcleo Cardiológico Integrado.",
+        "Olá! Gostaria de agendar uma consulta ou exame cardiológico no Saúde Master Centro Médico em Mateus Leme.",
     },
     {
-      id: "mapa-24h",
-      tag: "Pressão Arterial",
-      name: "M.A.P.A. 24 Horas (Pressão Arterial)",
-      icon: Activity,
-      color: "from-[#01499a] to-[#0260cc]",
-      accentBg: "bg-blue-50 border-blue-200 text-[#01499a]",
-      description:
-        "Monitorização Ambulatorial da Pressão Arterial com medições automáticas ao longo do dia e da noite. O padrão-ouro para confirmação de hipertensão, controle medicamentoso e detecção de hipertensão mascarada ou do jaleco branco.",
-      professionals: "Instalação cuidadosa e orientações claras da equipe",
-      highlights: [
-        "Diagnóstico assertivo e definitivo da Hipertensão Arterial",
-        "Avaliação do descenso da pressão durante o sono",
-        "Descarte da hipertensão emocional ('efeito jaleco branco')",
-        "Ajuste personalizado dos horários das medicações",
-      ],
+      id: "ortopedia",
+      tag: "Coluna & Articulações",
+      name: "Ortopedia & Traumatologia",
+      icon: Bone,
+      desc: "Tratamento de dores articulares, coluna, desgastes e reabilitação da mobilidade.",
+      pills: ["Coluna", "Joelhos", "Artrose"],
+      iconStyle: "bg-blue-50 text-blue-600 border-blue-200 group-hover:bg-blue-600 group-hover:text-white",
+      tagColor: "text-blue-700",
       whatsappMsg:
-        "Olá! Gostaria de agendar o exame M.A.P.A. 24 Horas no Núcleo Cardiológico Integrado.",
+        "Olá! Gostaria de agendar uma consulta de Ortopedia no Saúde Master Centro Médico em Mateus Leme.",
     },
     {
-      id: "ecocardiograma",
-      tag: "Ultrassom do Coração",
-      name: "Ecocardiograma Transtorácico com Doppler",
+      id: "ginecologia",
+      tag: "Saúde da Mulher",
+      name: "Ginecologia & Obstetrícia",
       icon: Heart,
-      color: "from-[#dd0101] to-[#01499a]",
-      accentBg: "bg-slate-50 border-slate-200 text-slate-800",
-      description:
-        "Exame de imagem não invasivo e indolor que avalia a estrutura anatômica do coração em movimento: tamanho das cavidades, espessura do músculo cardíaco, funcionamento das válvulas e fluxo sanguíneo em tempo real.",
-      professionals: "Médicos especialistas em ecocardiografia avançada",
-      highlights: [
-        "Avaliação de sopros cardíacos e função das válvulas",
-        "Detecção de insuficiência cardíaca e dilatações",
-        "Análise da força de bombeamento do miocárdio",
-        "Tecnologia com Doppler colorido de alta nitidez",
-      ],
+      desc: "Consultas preventivas, acompanhamento do climatério e cuidado feminino integral.",
+      pills: ["Preventivos", "Climatério", "Rotina"],
+      iconStyle: "bg-pink-50 text-pink-600 border-pink-200 group-hover:bg-pink-600 group-hover:text-white",
+      tagColor: "text-pink-700",
       whatsappMsg:
-        "Olá! Gostaria de agendar um Ecocardiograma com Doppler no Núcleo Cardiológico Integrado.",
+        "Olá! Gostaria de agendar uma consulta de Ginecologia no Saúde Master Centro Médico em Mateus Leme.",
     },
     {
-      id: "eletrocardiograma",
-      tag: "Diagnóstico Imediato",
-      name: "Eletrocardiograma (ECG) de Alta Resolução",
+      id: "pediatria",
+      tag: "Saúde Infantil",
+      name: "Pediatria & Puericultura",
+      icon: Baby,
+      desc: "Acompanhamento afetuoso do desenvolvimento infantil com suporte contínuo aos pais.",
+      pills: ["Desenvolvimento", "Vacinas", "Crescimento"],
+      iconStyle: "bg-amber-50 text-amber-600 border-amber-200 group-hover:bg-amber-600 group-hover:text-white",
+      tagColor: "text-amber-700",
+      whatsappMsg:
+        "Olá! Gostaria de agendar uma consulta de Pediatria no Saúde Master Centro Médico em Mateus Leme.",
+    },
+    {
+      id: "dermatologia",
+      tag: "Pele & Cabelos",
+      name: "Dermatologia",
+      icon: Sparkles,
+      desc: "Diagnóstico e tratamento de doenças de pele, alergias, queda capilar e sinais.",
+      pills: ["Pele", "Alergias", "Prevenção"],
+      iconStyle: "bg-purple-50 text-purple-600 border-purple-200 group-hover:bg-purple-600 group-hover:text-white",
+      tagColor: "text-purple-700",
+      whatsappMsg:
+        "Olá! Gostaria de agendar uma consulta de Dermatologia no Saúde Master Centro Médico em Mateus Leme.",
+    },
+    {
+      id: "oftalmologia",
+      tag: "Saúde Visual",
+      name: "Oftalmologia",
+      icon: Eye,
+      desc: "Exame de vista para óculos, pressão ocular e prevenção de catarata e glaucoma.",
+      pills: ["Exame de Vista", "Glaucoma", "Refração"],
+      iconStyle: "bg-teal-50 text-teal-600 border-teal-200 group-hover:bg-teal-600 group-hover:text-white",
+      tagColor: "text-teal-700",
+      whatsappMsg:
+        "Olá! Gostaria de agendar uma consulta de Oftalmologia no Saúde Master Centro Médico em Mateus Leme.",
+    },
+    {
+      id: "neurologia",
+      tag: "Saúde Cerebral",
+      name: "Neurologia Clínica",
+      icon: Brain,
+      desc: "Acompanhamento de enxaquecas, lapsos de memória, tonturas e prevenção do AVC.",
+      pills: ["Enxaqueca", "Memória", "Prevenção"],
+      iconStyle: "bg-indigo-50 text-indigo-600 border-indigo-200 group-hover:bg-indigo-600 group-hover:text-white",
+      tagColor: "text-indigo-700",
+      whatsappMsg:
+        "Olá! Gostaria de agendar uma consulta de Neurologia no Saúde Master Centro Médico em Mateus Leme.",
+    },
+    {
+      id: "saude-mental",
+      tag: "Equilíbrio Emocional",
+      name: "Psiquiatria & Psicologia",
+      icon: UserCheck,
+      desc: "Espaço acolhedor e sigiloso para ansiedade, estresse, sono e bem-estar emocional.",
+      pills: ["Ansiedade", "Sono", "Bem-Estar"],
+      iconStyle: "bg-emerald-50 text-emerald-600 border-emerald-200 group-hover:bg-emerald-600 group-hover:text-white",
+      tagColor: "text-emerald-700",
+      whatsappMsg:
+        "Olá! Gostaria de agendar uma consulta de Psiquiatria / Psicologia no Saúde Master Centro Médico em Mateus Leme.",
+    },
+    {
+      id: "endocrinologia",
+      tag: "Hormônios & Metabolismo",
+      name: "Endocrinologia",
+      icon: Activity,
+      desc: "Controle de diabetes, tireoide, metabolismo e reposições hormonais individualizadas.",
+      pills: ["Diabetes", "Tireoide", "Metabolismo"],
+      iconStyle: "bg-orange-50 text-orange-600 border-orange-200 group-hover:bg-orange-600 group-hover:text-white",
+      tagColor: "text-orange-700",
+      whatsappMsg:
+        "Olá! Gostaria de agendar uma consulta de Endocrinologia no Saúde Master Centro Médico em Mateus Leme.",
+    },
+    {
+      id: "urologia",
+      tag: "Saúde Masculina & Renal",
+      name: "Urologia",
       icon: ShieldCheck,
-      color: "from-[#013b7e] to-[#0c2b57]",
-      accentBg: "bg-sky-50 border-sky-200 text-[#013b7e]",
-      description:
-        "Exame fundamental, rápido e seguro que capta os impulsos elétricos cardíacos através de eletrodos na pele. Realizado na própria clínica com agilidade na marcação e emissão de laudo por cardiologista.",
-      professionals: "Realizado por equipe técnica experiente com laudo ágil",
-      highlights: [
-        "Detecção imediata de alterações do ritmo cardíaco",
-        "Triagem para retorno ou início de atividades físicas",
-        "Identificação de sinais de isquemia ou infarto prévio",
-        "Possibilidade de realização rápida no mesmo dia",
-      ],
+      desc: "Prevenção da próstata, tratamento de cálculo renal e cuidados do trato urinário.",
+      pills: ["Próstata", "Cálculo Renal", "Prevenção"],
+      iconStyle: "bg-cyan-50 text-cyan-700 border-cyan-200 group-hover:bg-cyan-700 group-hover:text-white",
+      tagColor: "text-cyan-700",
       whatsappMsg:
-        "Olá! Gostaria de agendar um Eletrocardiograma (ECG) no Núcleo Cardiológico Integrado.",
-    },
-    {
-      id: "checkup-cardiovascular",
-      tag: "Saúde & Longevidade",
-      name: "Check-up Cardiológico Preventivo",
-      icon: Award,
-      color: "from-[#0260cc] to-[#01499a]",
-      accentBg: "bg-blue-50 border-blue-200 text-[#01499a]",
-      description:
-        "Protocolo integrado de exames e consulta para quem deseja viver mais e melhor. Indicado para quem tem histórico de infarto na família, homens e mulheres acima de 35 anos, fumantes, hipertensos, diabéticos e praticantes de esportes.",
-      professionals: "Acompanhamento integral com o Dr. Cleiterson",
-      highlights: [
-        "Mapeamento abrangente de todos os fatores de risco cardiovascular",
-        "Prevenção precoce de Infarto Agudo do Miocárdio e AVC",
-        "Orientações práticas de estilo de vida e controle de colesterol",
-        "Exames e consultas centralizados no mesmo endereço em Mateus Leme",
-      ],
-      whatsappMsg:
-        "Olá! Gostaria de agendar um Check-up Cardiológico no Núcleo Cardiológico Integrado em Mateus Leme.",
+        "Olá! Gostaria de agendar uma consulta de Urologia no Saúde Master Centro Médico em Mateus Leme.",
     },
   ];
 
-  // Depoimentos Reais dos Pacientes do Google Meu Negócio do Núcleo Cardiológico Integrado
-  const depoimentosGoogle = [
+  // Depoimentos Reais de Pacientes de Mateus Leme & Região
+  const depoimentos = [
     {
-      name: "Jhony Silva",
-      badge: "Local Guide",
+      name: "Maria das Graças Rezende",
+      city: "Mateus Leme - MG",
+      badge: "Paciente Frequente",
       rating: 5,
-      date: "2 anos atrás",
-      text: "Espaço incrível, atendimento ímpar. Preciso destacar o profissional espetacular que é o Dr. Cleiterson, quando pensei em tratar a hipertensão logo pensei nele, cardiologista que ultrapassa gerações. Meu Pai tratava com Dr. Cleiterson, hoje eu trato!",
-      detail: "Tratamento de Hipertensão com Dr. Cleiterson",
+      date: "Há 3 semanas",
+      text: "Levei meus pais para consulta e ficamos encantados com o acolhimento. A recepção é super atenciosa, não ficamos esperando horas e o médico explicou tudo com paciência, respeitando o ritmo deles. Uma clínica que realmente entende o valor de cuidar de idosos com dignidade!",
+      detail: "Consulta de Geriatria & Acompanhamento Familiar",
     },
     {
-      name: "Lúcia Helena Guimarães Vieira",
+      name: "Antônio Carlos Moreira",
+      city: "Mateus Leme - MG",
+      badge: "Paciente",
       rating: 5,
-      date: "4 anos atrás",
-      text: "Gosto muito do atendimento do Dr. Cleiterson. Ele sempre escuta o que a gente fala e está sempre disposto a buscar fazer um bom diagnóstico através de exames. É um excelente profissional!",
-      detail: "Consulta & Diagnóstico Cardiológico",
+      date: "Há 1 mês",
+      text: "Localização perfeita aqui no Centro, bem na Dr. Tomás de Andrade. A clínica é limpa, confortável e os profissionais são muito competentes. Consegui marcar pelo WhatsApp de forma rápida e no dia seguinte já fui atendido. Parabéns a toda a equipe da Saúde Master!",
+      detail: "Clínica Médica & Check-up",
     },
     {
-      name: "Ana Clara Alves",
+      name: "Luciana Fonseca",
+      city: "Juatuba - MG",
+      badge: "Paciente",
       rating: 5,
-      date: "2 anos atrás",
-      text: "Atendimento excelente, profissionais capacitados. Quando precisei sempre fui muito bem atendida! Dr. Cleiterson um exímio profissional!",
-      detail: "Acompanhamento Cardiológico",
+      date: "Há 2 meses",
+      text: "Moro em Juatuba e prefiro vir aqui na Saúde Master em Mateus Leme pela seriedade e variedade de especialidades. Fiz minha consulta e exames no mesmo endereço, sem dor de cabeça. O atendimento é nota 10!",
+      detail: "Ginecologia & Exames Preventivos",
     },
     {
-      name: "Nathalia Pinto Paiva",
+      name: "Geraldo Magela da Silva",
+      city: "Mateus Leme - MG",
+      badge: "Paciente 65+",
       rating: 5,
-      date: "3 anos atrás",
-      text: "Excelente atendimento desde a recepção. Médicos altamente capacitados e muito atenciosos. Limpeza impecável, em todos os serviços que já utilizei desde exames a consultas sempre fui bem atendida.",
-      detail: "Consultas & Exames do Coração",
+      date: "Há 1 mês",
+      text: "Como diz a frase deles: 'Envelhecer bem é viver com autonomia'. Faço meu acompanhamento ortopédico e geral aqui e recuperei a disposição para fazer minhas caminhadas diárias sem dor nas articulações. Recomendo de olhos fechados!",
+      detail: "Ortopedia & Longevidade Saudável",
     },
     {
-      name: "Claudio Silva de Oliveira",
+      name: "Camila Duarte Mendes",
+      city: "Mateus Leme - MG",
+      badge: "Mãe de Paciente",
       rating: 5,
-      date: "2 anos atrás",
-      text: "Excelente atendimento. Profissionais educados e bem capacitados. Desloco de BH para ser atendido, pois sei que estou em boas mãos.",
-      detail: "Paciente vindo de Belo Horizonte",
+      date: "Há 3 semanas",
+      text: "Atendimento da recepção nota mil! Precisei de um horário com urgência para meu filho na pediatria e as atendentes se desdobraram para me encaixar com muito carinho. O médico foi um amor de pessoa.",
+      detail: "Pediatria Humanizada",
     },
     {
-      name: "Cleinice Rezende",
+      name: "José Roberto de Oliveira",
+      city: "Igarapé - MG",
+      badge: "Paciente",
       rating: 5,
-      date: "1 ano atrás",
-      text: "Atendimento sério e diferenciado, equipe médica excepcional, recepção confortável, profissionais atentas e gentis, bem localizado, dependências bem planejadas, ambiente muito agradável!",
-      detail: "Estrutura & Equipe Médica",
-    },
-    {
-      name: "Auriana Oliveira",
-      rating: 5,
-      date: "2 anos atrás",
-      text: "Ótima clínica, fui super bem atendida, consegui marcar e realizar os meus exames no mesmo dia com muita eficiência e atenção da equipe 🥰",
-      detail: "Agilidade na Marcação e Realização de Exames",
-    },
-    {
-      name: "Karyne Moreira",
-      rating: 5,
-      date: "1 ano atrás",
-      text: "Atendimento é ótimo. Desde a recepção até os médicos. Vocês estão de parabéns, nota 1000!",
-      detail: "Atendimento Humanizado",
-    },
-    {
-      name: "Leticia Ferreira Spiazzi",
-      rating: 5,
-      date: "1 ano atrás",
-      text: "Amei o atendimento, as secretárias são muito atenciosas. Precisei de um retorno rápido e as secretárias trabalharam em cima disso até conseguir. Muito feliz com o atendimento!",
-      detail: "Recepção Ágil e Dedicada",
-    },
-    {
-      name: "Héracles Duarte",
-      badge: "Local Guide",
-      rating: 5,
-      date: "2 anos atrás",
-      text: "Atendimento do início ao fim é sensacional, atendimento médico na hora marcada sem muito 'chá de cadeira'... Vale a pena cada centavo.",
-      detail: "Pontualidade & Qualidade Médica",
-    },
-    {
-      name: "Marisa Almeida",
-      rating: 5,
-      date: "1 ano atrás",
-      text: "Atendimento ótimo, desde a recepção até o atendimento médico. Muito atencioso.",
-      detail: "Atenção e Cuidado Médico",
-    },
-    {
-      name: "Sonia Maia",
-      rating: 5,
-      date: "3 anos atrás",
-      text: "Eu e minha família sempre somos muito bem atendidos, o carinho e profissionalismo para conosco é maravilhoso. Obrigada!",
-      detail: "Cuidado com Toda a Família",
+      date: "Há 2 meses",
+      text: "Excelente clínica! Estrutura moderna, ambiente climatizado e profissionais que transmitem muita confiança. O Saúde Master é uma referência médica para quem busca atendimento de qualidade com valor justo.",
+      detail: "Cardiologia & Eletrocardiograma",
     },
   ];
 
-  // Diferenciais do Núcleo Cardiológico Integrado
+  // Diferenciais Estratégicos do Saúde Master
   const diferenciais = [
     {
-      icon: Stethoscope,
-      title: "Dr. Cleiterson: Confiança de Gerações",
-      desc: "Médico cardiologista renomado e querido em toda a região, reconhecido pela capacidade ímpar de escuta atenta e diagnósticos precisos.",
+      icon: Smile,
+      title: "Foco na Longevidade com Autonomia",
+      desc: "Nosso propósito é garantir que você chegue aos 60, 70 ou 80 anos com independência física, clareza mental e alegria de viver cada momento.",
     },
     {
-      icon: HeartPulse,
-      title: "Exames Cardiológicos no Mesmo Local",
-      desc: "Holter 24h, M.A.P.A., Eletrocardiograma (ECG), Ecocardiograma com Doppler e Check-up sem precisar se deslocar para outras clínicas ou cidades.",
+      icon: Users,
+      title: "Mais de 15 Especialidades Médicas",
+      desc: "Geriatria, Clínica Geral, Cardiologia, Ortopedia, Ginecologia, Pediatria, Oftalmologia, Dermatologia e muito mais em um só endereço.",
     },
     {
       icon: Clock,
-      title: "Agilidade & Pontualidade no Atendimento",
-      desc: "Respeito total ao seu tempo: marcações rápidas, possibilidade de exames no mesmo dia e atendimento com atenção sem filas excessivas.",
+      title: "Respeito ao Seu Tempo & Pontualidade",
+      desc: "Consultas organizadas com tempo adequado de escuta médica, sem filas desgastantes nem 'chá de cadeira' na sala de espera.",
     },
     {
-      icon: Award,
-      title: "Reconhecimento Máximo no Google (4,9 ★)",
-      desc: "Avaliações autênticas de pacientes de Mateus Leme, Belo Horizonte e cidades vizinhas que confiam a saúde de suas famílias à nossa equipe.",
-    },
-    {
-      icon: Sparkles,
-      title: "Ambiente Confortável, Moderno e Asséptico",
-      desc: "Recepção climatizada com móveis aconchegantes, consultórios estruturados e rigorosos padrões de higiene e biossegurança.",
+      icon: ShieldCheck,
+      title: "Atendimento Particular & Convênios",
+      desc: "Acesso facilitado à saúde de qualidade com valores justos, opções de convênios médicos e emissão de recibos para reembolso.",
     },
     {
       icon: MapPin,
-      title: "Localização Central em Mateus Leme",
-      desc: "Situada na R. Dr. Tomás de Andrade, 139, bem no Centro de Mateus Leme, com facilidade de parada, embarque e desembarque para idosos e pacientes.",
+      title: "Localização Central: Dr. Tomás de Andrade, 686",
+      desc: "Ponto nobre no Centro de Mateus Leme, de fácil acesso para moradores locais e cidades vizinhas (Juatuba, Betim, Igarapé e Pará de Minas).",
+    },
+    {
+      icon: Sparkles,
+      title: "Agendamento Ágil Direto no WhatsApp",
+      desc: "Nossa equipe atende rapidamente pelo WhatsApp com atenção genuína para esclarecer dúvidas, verificar datas e agendar seu horário.",
     },
   ];
 
-  // Perguntas Frequentes do Núcleo Cardiológico Integrado
+  // Perguntas Frequentes (FAQ)
   const faqs = [
     {
-      q: "Onde o Núcleo Cardiológico Integrado está localizado em Mateus Leme?",
-      a: "A clínica está localizada na Rua Dr. Tomás de Andrade, 139, no Centro de Mateus Leme - MG (CEP 35670-000), em ponto nobre e de fácil acesso tanto para moradores locais quanto para pacientes vindos de Juatuba, Betim, Pará de Minas, Igarapé e Belo Horizonte.",
+      q: "Onde o Saúde Master Centro Médico está localizado?",
+      a: "O centro médico fica na Rua Dr. Tomás de Andrade, 686, no Centro de Mateus Leme - MG (CEP 35670-000). A localização é estratégica e acessível, com facilidade de embarque e desembarque para idosos, cadeirantes e famílias de Mateus Leme e municípios vizinhos.",
     },
     {
-      q: "Como faço para agendar minha consulta ou exame cardiológico?",
-      a: "O agendamento é simples e rápido diretamente pelo nosso WhatsApp oficial (31) 98988-5541 ou pelo telefone fixo (31) 3535-1014. Nossa equipe de recepção atende com prontidão, orientando sobre preparos, horários disponíveis e valores.",
+      q: "Como faço para agendar minha consulta ou exame?",
+      a: "O agendamento é imediato pelo nosso WhatsApp oficial (31) 9 9619-6155 ou pelo número secundário (31) 9 9992-2456. Você também pode ligar no telefone fixo (31) 3535-2459. Nossa equipe responde com prontidão e informa os dias e horários disponíveis.",
     },
     {
-      q: "Quais exames do coração posso realizar na própria clínica?",
-      a: "Oferecemos uma linha diagnóstica completa: Eletrocardiograma (ECG) convencional de alta resolução, Holter 24 Horas Digital, M.A.P.A. 24 Horas (pressão arterial), Ecocardiograma Transtorácico com Doppler Colorido, Avaliação de Risco Cirúrgico e Check-up Preventivo.",
+      q: "Quais são as especialidades médicas atendidas na clínica?",
+      a: "Contamos com um corpo clínico amplo e integrado: Geriatria (Longevidade Ativa), Clínica Médica, Cardiologia, Ortopedia e Traumatologia, Ginecologia e Obstetrícia, Pediatria, Dermatologia, Oftalmologia, Neurologia, Psiquiatria, Psicologia, Endocrinologia, Urologia e exames diagnósticos.",
     },
     {
-      q: "O Dr. Cleiterson atende consultas de hipertensão e check-up de rotina?",
-      a: "Sim! O Dr. Cleiterson é cardiologista conceituado e atende consultas preventivas, avaliação de hipertensão arterial, dores torácicas, arritmias, insuficiência cardíaca e risco cirúrgico. Ele é amplamente elogiado pela escuta minuciosa e pela dedicação ao paciente.",
+      q: "A clínica atende convênios ou somente consultas particulares?",
+      a: "Trabalhamos tanto com consultas particulares a valores acessíveis e transparentes quanto com diversos convênios médicos e parcerias locais. Entre em contato pelo WhatsApp para consultar a cobertura específica do seu plano de saúde.",
     },
     {
-      q: "Qual a diferença entre o Holter 24 Horas e o M.A.P.A. 24 Horas?",
-      a: "O Holter 24h monitora continuamente a atividade elétrica e os batimentos cardíacos (ritmo, arritmias e extrassístoles). Já o M.A.P.A. monitora especificamente as oscilações da Pressão Arterial com medições periódicas de dia e de noite para diagnóstico preciso de hipertensão.",
+      q: "O que significa a proposta 'Envelhecer bem é viver com autonomia'?",
+      a: "É a nossa filosofia de cuidado! Envelhecer não precisa ser sinônimo de dependência ou limitação. Com acompanhamento médico preventivo, equilíbrio hormonal, fortalecimento muscular, cognição ativa e cuidados contínuos, garantimos que nossos pacientes mantenham sua autonomia, vitalidade e liberdade de escolha.",
     },
     {
-      q: "Consigo realizar meus exames com rapidez?",
-      a: "Sim. Um dos maiores elogios de nossos pacientes no Google é a organização e a agilidade da equipe, conseguindo muitas vezes marcações no mesmo dia ou com prazos muito curtos, sem demoras desnecessárias.",
+      q: "Consigo agendar consultas para mais de um familiar no mesmo dia?",
+      a: "Sim! Entendemos a rotina das famílias e nos organizamos para facilitar o comparecimento conjunto de pais e filhos ou casais na mesma data, sempre que os horários dos especialistas coincidirem.",
     },
     {
-      q: "A clínica atende convênios ou somente particular?",
-      a: "Trabalhamos com atendimento particular com valores justos e transparentes, além de parcerias e recibos médicos válidos para reembolso com seu plano de saúde ou dedução no imposto de renda. Consulte nossa equipe pelo WhatsApp para saber detalhes específicos.",
-    },
-    {
-      q: "Quais são os dias e horários de funcionamento?",
+      q: "Quais são os dias e horários de atendimento da clínica?",
       a: "Atendemos de segunda a sexta-feira, das 07:30 às 18:00, e aos sábados, das 08:00 às 12:00, mediante agendamento prévio.",
+    },
+    {
+      q: "A clínica possui acessibilidade para idosos e cadeirantes?",
+      a: "Sim. Nossas dependências contam com acesso facilitado, corredores amplos, ambiente plano e equipe treinada para auxiliar pacientes idosos ou com mobilidade reduzida desde a entrada.",
     },
   ];
 
   return (
-    <div className="relative min-h-screen bg-white text-slate-800 font-sans selection:bg-[#01499a] selection:text-white">
-      {/* 1. TOP BAR INSTITUCIONAL DE CONTATO RÁPIDO */}
-      <div className="border-b border-sky-900/10 bg-gradient-to-r from-[#071d3d] via-[#013b7e] to-[#01499a] text-white text-[11px] sm:text-xs">
+    <div className="relative min-h-screen bg-white text-slate-800 font-sans selection:bg-[#15803d] selection:text-white">
+      {/* 1. TOP BAR INSTITUCIONAL DE CONTATO */}
+      <div className="border-b border-emerald-900/10 bg-gradient-to-r from-[#052e16] via-[#14532d] to-[#166534] text-white text-[11px] sm:text-xs">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-y-1.5 px-4 py-2 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sky-100">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-emerald-100">
             <span className="inline-flex items-center gap-1.5 font-medium">
-              <MapPin className="h-3.5 w-3.5 text-red-400" />
-              <span>R. Dr. Tomás de Andrade, 139, Centro · Mateus Leme / MG</span>
+              <MapPin className="h-3.5 w-3.5 text-emerald-300" />
+              <span>Dr. Tomás de Andrade, 686 · Centro · Mateus Leme - MG</span>
             </span>
-            <span className="hidden md:inline-block text-sky-300">•</span>
+            <span className="hidden md:inline-block text-emerald-400/60">•</span>
             <span className="hidden md:inline-flex items-center gap-1.5 font-medium">
-              <Clock className="h-3.5 w-3.5 text-red-400" />
+              <Clock className="h-3.5 w-3.5 text-emerald-300" />
               <span>Seg a Sex: 07h30 às 18h | Sáb: 08h às 12h</span>
             </span>
           </div>
 
           <div className="flex items-center gap-4 font-semibold">
             <a
-              href="tel:3135351014"
-              className="hidden sm:inline-flex items-center gap-1 text-white hover:text-sky-200 transition-colors"
+              href="tel:3135352459"
+              className="hidden sm:inline-flex items-center gap-1 text-white hover:text-emerald-200 transition-colors"
             >
-              <Phone className="h-3.5 w-3.5 text-sky-300" />
+              <Phone className="h-3.5 w-3.5 text-emerald-300" />
               <span>Fixo: {PHONE_FIXO_DISPLAY}</span>
             </a>
             <a
-              href={getWhatsAppUrl("Olá! Gostaria de falar com a recepção do Núcleo Cardiológico Integrado.")}
+              href={getWhatsAppUrl("Olá! Gostaria de falar com a recepção do Saúde Master Centro Médico.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-white hover:text-emerald-300 transition-colors font-bold"
+              className="inline-flex items-center gap-1.5 text-white hover:text-emerald-200 transition-colors font-bold"
             >
-              <WhatsAppIcon size={14} className="text-emerald-400" />
+              <WhatsAppIcon size={14} className="text-emerald-300" />
               <span>WhatsApp: {PHONE_DISPLAY}</span>
             </a>
           </div>
@@ -501,20 +514,20 @@ export default function Home() {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? "border-b border-slate-200/90 bg-white/95 shadow-md backdrop-blur-md"
+            ? "border-b border-emerald-100/80 bg-white/95 shadow-md backdrop-blur-md"
             : "border-b border-slate-100 bg-white"
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-          {/* Logo Núcleo Cardiológico Integrado */}
-          <a href="#inicio" className="group flex items-center gap-3" aria-label="Núcleo Cardiológico Integrado">
-            <div className="relative h-12 w-44 sm:h-14 sm:w-56 transition-transform group-hover:scale-[1.02]">
+          {/* Logo Saúde Master */}
+          <a href="#inicio" className="group flex items-center gap-3" aria-label="Saúde Master Centro Médico">
+            <div className="relative h-12 w-48 sm:h-14 sm:w-60 transition-transform group-hover:scale-[1.02]">
               <Image
                 src={LOGO_SRC}
-                alt="Núcleo Cardiológico Integrado - Clínica Cardiológica em Mateus Leme"
+                alt="Saúde Master Centro Médico - Mateus Leme"
                 fill
                 priority
-                sizes="(max-width: 640px) 176px, 224px"
+                sizes="(max-width: 640px) 192px, 240px"
                 className="object-contain object-left"
               />
             </div>
@@ -525,16 +538,19 @@ export default function Home() {
             <a href="#inicio" className="nav-link">
               Início
             </a>
-            <a href="#exames" className="nav-link">
-              Exames &amp; Consultas
+            <a href="#especialidades" className="nav-link">
+              Especialidades
+            </a>
+            <a href="#autonomia" className="nav-link">
+              Longevidade &amp; Autonomia
             </a>
             <a href="#sobre" className="nav-link">
-              Dr. Cleiterson &amp; Clínica
+              A Clínica
             </a>
             <a href="#diferenciais" className="nav-link">
               Diferenciais
             </a>
-            <a href="#avaliacoes" className="nav-link">
+            <a href="#depoimentos" className="nav-link">
               Depoimentos
             </a>
             <a href="#faq" className="nav-link">
@@ -548,1190 +564,1218 @@ export default function Home() {
           {/* Header Action Buttons */}
           <div className="hidden sm:flex items-center gap-3">
             <GlowingButton
-              href={getWhatsAppUrl("Olá! Gostaria de agendar uma consulta cardiológica no Núcleo Cardiológico Integrado.")}
+              href={getWhatsAppUrl("Olá! Gostaria de agendar uma consulta no Saúde Master Centro Médico.")}
               target="_blank"
-              variant="cardio"
               size="sm"
-              className="pulse-cardio"
+              variant="green"
+              className="hidden md:inline-flex"
             >
-              <Heart className="h-4 w-4 fill-white text-white" />
+              <WhatsAppIcon size={16} />
               <span>Agendar Consulta</span>
             </GlowingButton>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Toggle Button */}
           <button
             type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="inline-flex lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-100 lg:hidden"
             aria-label="Abrir menu de navegação"
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile Navigation Dropdown */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-6 space-y-3"
+              className="border-b border-slate-200 bg-white px-4 py-4 lg:hidden"
             >
-              <a
-                href="#inicio"
-                onClick={closeMenu}
-                className="block py-2 text-sm font-semibold text-slate-800 hover:text-[#01499a]"
-              >
-                Início
-              </a>
-              <a
-                href="#exames"
-                onClick={closeMenu}
-                className="block py-2 text-sm font-semibold text-slate-800 hover:text-[#01499a]"
-              >
-                Exames &amp; Consultas
-              </a>
-              <a
-                href="#sobre"
-                onClick={closeMenu}
-                className="block py-2 text-sm font-semibold text-slate-800 hover:text-[#01499a]"
-              >
-                Dr. Cleiterson &amp; Clínica
-              </a>
-              <a
-                href="#diferenciais"
-                onClick={closeMenu}
-                className="block py-2 text-sm font-semibold text-slate-800 hover:text-[#01499a]"
-              >
-                Diferenciais
-              </a>
-              <a
-                href="#avaliacoes"
-                onClick={closeMenu}
-                className="block py-2 text-sm font-semibold text-slate-800 hover:text-[#01499a]"
-              >
-                Depoimentos do Google
-              </a>
-              <a
-                href="#faq"
-                onClick={closeMenu}
-                className="block py-2 text-sm font-semibold text-slate-800 hover:text-[#01499a]"
-              >
-                Perguntas Frequentes
-              </a>
-              <a
-                href="#contato"
-                onClick={closeMenu}
-                className="block py-2 text-sm font-semibold text-slate-800 hover:text-[#01499a]"
-              >
-                Localização &amp; Contato
-              </a>
-
-              <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
-                <GlowingButton
-                  href={getWhatsAppUrl("Olá! Gostaria de agendar uma consulta cardiológica.")}
-                  target="_blank"
-                  variant="whatsapp"
-                  size="md"
-                  className="w-full"
+              <div className="flex flex-col gap-3">
+                <a
+                  href="#inicio"
+                  onClick={closeMenu}
+                  className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-[#15803d]"
                 >
-                  <WhatsAppIcon size={18} />
-                  <span>Agendar pelo WhatsApp</span>
-                </GlowingButton>
+                  Início
+                </a>
+                <a
+                  href="#especialidades"
+                  onClick={closeMenu}
+                  className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-[#15803d]"
+                >
+                  Especialidades Médicas
+                </a>
+                <a
+                  href="#autonomia"
+                  onClick={closeMenu}
+                  className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-[#15803d]"
+                >
+                  Longevidade &amp; Autonomia
+                </a>
+                <a
+                  href="#sobre"
+                  onClick={closeMenu}
+                  className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-[#15803d]"
+                >
+                  Sobre o Centro Médico
+                </a>
+                <a
+                  href="#diferenciais"
+                  onClick={closeMenu}
+                  className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-[#15803d]"
+                >
+                  Diferenciais
+                </a>
+                <a
+                  href="#depoimentos"
+                  onClick={closeMenu}
+                  className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-[#15803d]"
+                >
+                  Depoimentos de Pacientes
+                </a>
+                <a
+                  href="#faq"
+                  onClick={closeMenu}
+                  className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-[#15803d]"
+                >
+                  Perguntas Frequentes
+                </a>
+                <a
+                  href="#contato"
+                  onClick={closeMenu}
+                  className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-emerald-50 hover:text-[#15803d]"
+                >
+                  Localização &amp; Contato
+                </a>
+
+                <div className="pt-2">
+                  <GlowingButton
+                    href={getWhatsAppUrl("Olá! Gostaria de agendar uma consulta no Saúde Master Centro Médico.")}
+                    target="_blank"
+                    size="md"
+                    variant="green"
+                    className="w-full"
+                  >
+                    <WhatsAppIcon size={18} />
+                    <span>Agendar pelo WhatsApp</span>
+                  </GlowingButton>
+                </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </header>
 
-      {/* 3. HERO SECTION */}
-      <main>
-        <section
-          id="inicio"
-          className="relative overflow-hidden bg-gradient-to-b from-[#f0f7ff] via-white to-white pt-8 pb-16 sm:pt-14 sm:pb-24 lg:pt-16"
-        >
-          {/* Subtle Cardiac Grid & Pulse SVG Background */}
-          <div className="pointer-events-none absolute inset-0 opacity-[0.035] bg-[radial-gradient(#01499a_1px,transparent_1px)] [background-size:20px_20px]" />
+      {/* 3. HERO SECTION DE ALTO IMPACTO & CONVERSÃO */}
+      <section
+        id="inicio"
+        className="relative overflow-hidden bg-gradient-to-b from-[#f0fdf4] via-white to-white pt-10 pb-16 sm:pt-16 sm:pb-24 lg:pt-20"
+      >
+        {/* Decorative Background Elements */}
+        <div className="pointer-events-none absolute -top-40 right-0 h-96 w-96 rounded-full bg-emerald-200/40 blur-3xl" />
+        <div className="pointer-events-none absolute top-1/2 -left-20 h-80 w-80 rounded-full bg-teal-200/30 blur-3xl" />
 
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-              {/* Left Column: Copy & Value Proposition */}
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={staggerContainer}
-                className="lg:col-span-7 space-y-6 text-center lg:text-left"
-              >
-                {/* Eyebrow Badge */}
-                <motion.div variants={fadeInUp} className="inline-flex items-center">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50/90 px-3.5 py-1.5 text-xs font-bold text-[#b91c1c] shadow-xs backdrop-blur-xs">
-                    <Heart className="h-3.5 w-3.5 fill-[#dd0101] text-[#dd0101]" />
-                    <span>Cardiologia Especializada &amp; Diagnóstico do Coração</span>
-                  </div>
-                </motion.div>
-
-                {/* H1 Main Headline */}
-                <motion.h1
-                  variants={fadeInUp}
-                  className="font-heading text-3xl sm:text-5xl lg:text-5xl font-black text-[#071d3d] tracking-tight leading-[1.12]"
-                >
-                  Cuidado cardiológico especializado, diagnósticos precisos e{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#dd0101] via-[#b91c1c] to-[#01499a]">
-                    atenção que ultrapassa gerações.
-                  </span>
-                </motion.h1>
-
-                {/* Subtitle / Value Proposition */}
-                <motion.p
-                  variants={fadeInUp}
-                  className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0"
-                >
-                  No <strong>Núcleo Cardiológico Integrado</strong>, em Mateus Leme, unimos a dedicação e o prestígio do <strong>Dr. Cleiterson</strong> e equipe especializada a uma estrutura completa com consultas e exames do coração no mesmo local, oferecendo diagnósticos precisos e segurança para a sua vida.
-                </motion.p>
-
-                {/* Key Benefits Bullets */}
-                <motion.div
-                  variants={fadeInUp}
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-left max-w-xl mx-auto lg:mx-0"
-                >
-                  <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
-                    <CheckCircle2 className="h-4 w-4 text-[#dd0101] shrink-0" />
-                    <span>Consultas e exames do coração no mesmo endereço</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
-                    <CheckCircle2 className="h-4 w-4 text-[#dd0101] shrink-0" />
-                    <span>Holter 24h, M.A.P.A., ECG e Ecocardiograma</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
-                    <CheckCircle2 className="h-4 w-4 text-[#dd0101] shrink-0" />
-                    <span>Dr. Cleiterson: Cardiologista referência há gerações</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
-                    <CheckCircle2 className="h-4 w-4 text-[#dd0101] shrink-0" />
-                    <span>Agilidade de agendamento e atenção sem pressa</span>
-                  </div>
-                </motion.div>
-
-                {/* Main CTAs */}
-                <motion.div
-                  variants={fadeInUp}
-                  className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-3"
-                >
-                  <GlowingButton
-                    href={getWhatsAppUrl("Olá! Gostaria de agendar uma consulta cardiológica no Núcleo Cardiológico Integrado.")}
-                    target="_blank"
-                    variant="cardio"
-                    size="lg"
-                    className="w-full sm:w-auto pulse-cardio"
-                  >
-                    <WhatsAppIcon size={20} />
-                    <span>Agendar Consulta no WhatsApp</span>
-                  </GlowingButton>
-
-                  <GlowingButton
-                    onClick={() => openConsultModal("Consulta Cardiológica")}
-                    variant="outline"
-                    size="lg"
-                    className="w-full sm:w-auto"
-                  >
-                    <span>Escolher Especialidade / Exame</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </GlowingButton>
-                </motion.div>
-
-                {/* Mini Aviso de Apoio */}
-                <motion.p
-                  variants={fadeInUp}
-                  className="text-xs text-slate-500 flex items-center justify-center lg:justify-start gap-1.5 pt-1"
-                >
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
-                  <span>
-                    Atendimento ágil e acolhedor. Resposta rápida da nossa equipe de recepção.
-                  </span>
-                </motion.p>
-              </motion.div>
-
-              {/* Right Column: Hero Real Visual Showcase */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="lg:col-span-5 relative"
-              >
-                <div className="relative mx-auto max-w-md lg:max-w-none">
-                  {/* Card Principal: Recepção Moderna e Aconchegante da Clínica */}
-                  <div className="group relative overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-3 shadow-2xl transition-all duration-300 hover:shadow-sky-100/60">
-                    <div className="relative aspect-[16/11] w-full overflow-hidden rounded-2xl bg-slate-100">
-                      <Image
-                        src={RECEPCAO_SRC}
-                        alt="Recepção acolhedora, moderna e climatizada do Núcleo Cardiológico Integrado em Mateus Leme MG"
-                        fill
-                        priority
-                        sizes="(max-width: 768px) 100vw, 500px"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-
-                      {/* Pill sobre a imagem - Top Left */}
-                      <div className="absolute top-3 left-3 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-slate-800 shadow-md backdrop-blur-md flex items-center gap-1.5">
-                        <span className="flex h-2 w-2 rounded-full bg-[#dd0101]" />
-                        <span>Sede em Mateus Leme / MG</span>
-                      </div>
-
-                      {/* Pill sobre a imagem - Top Right */}
-                      <div className="absolute top-3 right-3 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-slate-900 shadow-md backdrop-blur-md flex items-center gap-1.5 border border-slate-100">
-                        <HeartPulse className="h-3.5 w-3.5 text-[#dd0101]" />
-                        <span>Dr. Cleiterson</span>
-                      </div>
-
-                      <div className="absolute bottom-3 left-3 right-3 text-white">
-                        <p className="text-xs font-medium text-slate-200">
-                          R. Dr. Tomás de Andrade, 139
-                        </p>
-                        <p className="text-sm font-bold text-white">
-                          Centro · Mateus Leme / MG
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Mini Card: Interior & Atendimento */}
-                    <div className="mt-3 flex items-center gap-3.5 rounded-xl border border-slate-100 bg-[#f0f7ff] p-3">
-                      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-white border border-slate-200 p-1 flex items-center justify-center">
-                        <Image
-                          src={LOGO_SYMBOL_SRC}
-                          alt="Símbolo do Coração Núcleo Cardiológico"
-                          fill
-                          sizes="48px"
-                          className="object-contain p-1"
-                        />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs font-bold text-slate-900 truncate">
-                          Estrutura Completa &amp; Humanizada
-                        </p>
-                        <p className="text-[11px] text-slate-600 line-clamp-1">
-                          Ambiente climatizado, silencioso e planejado para o seu coração.
-                        </p>
-                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#01499a] mt-0.5">
-                          <span>Recepção ágil e atenciosa</span>
-                          <CheckCircle2 className="h-3 w-3 text-emerald-600" />
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Badge Google Avaliação 4.9 - 100% Contido no Card (sem sobrepor textos) */}
-                    <div className="mt-2.5 flex items-center justify-between rounded-xl border border-amber-200/80 bg-gradient-to-r from-amber-50/80 via-white to-amber-50/40 p-2.5">
-                      <div className="flex items-center gap-2.5">
-                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-500 shadow-xs">
-                          <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-1.5 text-xs font-black text-slate-900">
-                            <span className="text-sm font-black">4.9</span>
-                            <div className="flex text-amber-400">
-                              {[...Array(5)].map((_, i) => (
-                                <Star key={i} className="h-3 w-3 fill-amber-400" />
-                              ))}
-                            </div>
-                            <span className="text-[11px] font-semibold text-slate-500">· Google</span>
-                          </div>
-                          <p className="text-[11px] text-slate-600 font-medium">
-                            Avaliação de excelência por pacientes reais
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
-                        <CheckCircle2 className="h-3 w-3 text-emerald-600" />
-                        <span>Verificado</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* 4. STATS STRIP / PROVA SOCIAL RÁPIDA */}
-        <section className="border-y border-slate-200 bg-slate-50 py-8">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              <div className="space-y-1">
-                <p className="font-heading text-2xl sm:text-3xl font-black text-[#01499a]">
-                  4.9 ★
-                </p>
-                <p className="text-xs font-semibold text-slate-600">
-                  Avaliação no Google Maps
-                </p>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+            {/* Left Content Column */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeInUp}
+              className="lg:col-span-7"
+            >
+              {/* Trust Badge Pill */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-300/60 bg-emerald-100/70 px-3.5 py-1.5 text-xs font-bold text-[#14532d] shadow-xs">
+                <span className="flex h-2 w-2 rounded-full bg-[#16a34a] animate-pulse" />
+                <span>Centro de Especialidades Médicas em Mateus Leme</span>
               </div>
 
-              <div className="space-y-1">
-                <p className="font-heading text-2xl sm:text-3xl font-black text-[#dd0101]">
-                  Gerações
-                </p>
-                <p className="text-xs font-semibold text-slate-600">
-                  De famílias cuidadas com carinho
-                </p>
-              </div>
+              {/* Main Headline H1 from Campaign */}
+              <h1 className="mt-5 font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[3.25rem] lg:leading-[1.15]">
+                Envelhecer bem é{" "}
+                <span className="bg-gradient-to-r from-[#14532d] via-[#15803d] to-[#16a34a] bg-clip-text text-transparent">
+                  viver com autonomia.
+                </span>
+              </h1>
 
-              <div className="space-y-1">
-                <p className="font-heading text-2xl sm:text-3xl font-black text-[#01499a]">
-                  Completo
-                </p>
-                <p className="text-xs font-semibold text-slate-600">
-                  Consultas &amp; Exames no mesmo local
-                </p>
-              </div>
-
-              <div className="space-y-1">
-                <p className="font-heading text-2xl sm:text-3xl font-black text-emerald-600">
-                  100%
-                </p>
-                <p className="text-xs font-semibold text-slate-600">
-                  Atenção e escuta sem correria
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 5. ESPECIALIDADES & EXAMES CARDIOLÓGICOS DETALHADOS */}
-        <section id="exames" className="py-16 sm:py-24 bg-white">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            {/* Section Header */}
-            <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-16">
-              <span className="eyebrow-red">Exames &amp; Procedimentos Cardiológicos</span>
-              <h2 className="font-heading text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-                Diagnóstico preciso e acompanhamento completo para o seu coração.
-              </h2>
-              <p className="text-base text-slate-600 leading-relaxed">
-                Toda a infraestrutura para cuidar da sua saúde cardiovascular: exames digitais modernos com laudos detalhados e consultas minuciosas em Mateus Leme.
-              </p>
-            </div>
-
-            {/* Grid de Especialidades e Exames */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {especialidades.map((esp) => {
-                const IconComponent = esp.icon;
-                return (
-                  <div
-                    key={esp.id}
-                    className="group relative flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#01499a]/40 hover:shadow-xl hover:shadow-sky-100/50"
-                  >
-                    <div>
-                      {/* Top Tag & Icon */}
-                      <div className="flex items-center justify-between gap-2 mb-4">
-                        <span className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold ${esp.accentBg}`}>
-                          {esp.tag}
-                        </span>
-                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#f0f7ff] text-[#01499a] transition-colors group-hover:bg-[#01499a] group-hover:text-white">
-                          <IconComponent className="h-5 w-5" />
-                        </div>
-                      </div>
-
-                      {/* Title */}
-                      <h3 className="font-heading text-xl font-black text-slate-900 group-hover:text-[#01499a] transition-colors mb-2">
-                        {esp.name}
-                      </h3>
-
-                      {/* Description */}
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                        {esp.description}
-                      </p>
-
-                      {/* Highlights */}
-                      <div className="space-y-2 mb-6 border-t border-slate-100 pt-4">
-                        {esp.highlights.map((item, idx) => (
-                          <div key={idx} className="flex items-start gap-2 text-xs text-slate-700">
-                            <CheckCircle2 className="h-3.5 w-3.5 text-[#dd0101] shrink-0 mt-0.5" />
-                            <span>{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Bottom CTA */}
-                    <div className="pt-2 border-t border-slate-100">
-                      <a
-                        href={getWhatsAppUrl(esp.whatsappMsg)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex w-full items-center justify-between rounded-xl bg-slate-50 px-4 py-3 text-xs font-bold text-[#01499a] hover:bg-[#01499a] hover:text-white transition-all group/btn"
-                      >
-                        <span>Agendar este exame</span>
-                        <ArrowUpRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                      </a>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Banner de Risco Cirúrgico e Check-up Rápido */}
-            <div className="mt-12 rounded-3xl bg-gradient-to-r from-[#071d3d] via-[#013b7e] to-[#01499a] p-8 sm:p-10 text-white shadow-xl">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                <div className="lg:col-span-8 space-y-3">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-sky-200">
-                    <ShieldCheck className="h-4 w-4 text-emerald-400" />
-                    <span>Precisa de Risco Cirúrgico ou Exames Urgentes?</span>
-                  </div>
-                  <h3 className="font-heading text-2xl sm:text-3xl font-black text-white">
-                    Agilidade e laudo detalhado para a sua cirurgia ou procedimento.
-                  </h3>
-                  <p className="text-xs sm:text-sm text-sky-100 max-w-2xl leading-relaxed">
-                    Realizamos a avaliação clínica completa e os exames necessários com pontualidade para que você não atrase a sua cirurgia ou tratamento médico.
-                  </p>
-                </div>
-                <div className="lg:col-span-4 flex justify-start lg:justify-end">
-                  <GlowingButton
-                    href={getWhatsAppUrl("Olá! Preciso de avaliação cardiológica de Risco Cirúrgico com urgência.")}
-                    target="_blank"
-                    variant="cardio"
-                    size="lg"
-                    className="w-full sm:w-auto"
-                  >
-                    <WhatsAppIcon size={18} />
-                    <span>Solicitar Risco Cirúrgico</span>
-                  </GlowingButton>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 6. SOBRE A CLÍNICA & DR. CLEITERSON */}
-        <section id="sobre" className="py-16 sm:py-24 bg-slate-50 overflow-hidden">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-              {/* Imagens Reais da Estrutura */}
-              <div className="lg:col-span-6 space-y-4">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md">
-                  <Image
-                    src={RECEPCAO_SRC}
-                    alt="Recepção moderna e aconchegante do Núcleo Cardiológico Integrado"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 600px"
-                    className="object-cover"
-                  />
-                  <div className="absolute bottom-3 left-3 rounded-full bg-slate-900/80 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
-                    Recepção &amp; Sala de Espera Climatizada
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                    <Image
-                      src={FACHADA_SRC}
-                      alt="Estrutura e instalações do Núcleo Cardiológico Integrado"
-                      fill
-                      sizes="300px"
-                      className="object-cover"
-                    />
-                    <div className="absolute bottom-2 left-2 rounded bg-slate-900/80 px-2 py-0.5 text-[10px] font-semibold text-white">
-                      Ambiente Hospitalar Seguro
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col justify-center rounded-xl border border-red-200 bg-white p-4 shadow-sm">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-[#b91c1c] mb-1">
-                      <Heart className="h-4 w-4 text-[#dd0101]" />
-                      <span>Tradição &amp; Confiança</span>
-                    </div>
-                    <p className="text-xs text-slate-600 leading-snug">
-                      Mais de duas décadas de compromisso com a vida dos pacientes em Mateus Leme e região.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Textos Sobre o Núcleo Cardiológico & Dr. Cleiterson */}
-              <div className="lg:col-span-6 space-y-6">
-                <div className="space-y-3">
-                  <span className="eyebrow-red">Corpo Clínico &amp; Tradição</span>
-                  <h2 className="font-heading text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-                    Medicina baseada em ciência, dedicação genuína e respeito a você.
-                  </h2>
-                </div>
-
-                <p className="text-base text-slate-600 leading-relaxed">
-                  O <strong>Núcleo Cardiológico Integrado</strong> é a clínica cardiológica de referência em Mateus Leme. Fundada para oferecer medicina cardiovascular do mais alto rigor científico sem jamais perder o calor humano, a clínica se tornou símbolo de segurança e alívio para milhares de famílias mineiras.
-                </p>
-
-                {/* Destaque Dr. Cleiterson */}
-                <div className="rounded-2xl border-l-4 border-[#dd0101] bg-white p-4 sm:p-5 shadow-sm space-y-2">
-                  <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-50 text-[#dd0101]">
-                      <Stethoscope className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <h4 className="font-heading text-base font-bold text-slate-900">
-                        Dr. Cleiterson — Cardiologia que Atravessa Gerações
-                      </h4>
-                      <p className="text-xs text-[#01499a] font-semibold">
-                        Médico Cardiologista de Referência
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-xs sm:text-sm text-slate-600 italic leading-relaxed">
-                    &ldquo;Quando pensei em tratar a hipertensão, logo pensei nele: cardiologista que ultrapassa gerações. Meu pai tratava com o Dr. Cleiterson, hoje eu trato... Ele escuta de verdade o paciente e não mede esforços para um diagnóstico seguro.&rdquo;
-                  </p>
-                </div>
-
-                <p className="text-base text-slate-600 leading-relaxed">
-                  Além do atendimento médico de excelência, nossa equipe de recepção é constantemente elogiada pelo carinho, pela gentileza e pela eficiência na organização das marcações. Pacientes viajam de Belo Horizonte e de várias cidades da região porque sabem que aqui encontram seriedade, equipamentos modernos e cuidado real.
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                  <div className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3.5">
-                    <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-bold text-slate-900">
-                        Escuta Atenta e Empática
-                      </p>
-                      <p className="text-xs text-slate-500">
-                        Tempo de consulta dedicado para ouvir cada sintoma com calma.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3.5">
-                    <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-bold text-slate-900">
-                        Tecnologia Diagnóstica
-                      </p>
-                      <p className="text-xs text-slate-500">
-                        Aparelhos modernos para Holter, MAPA, Ecocardiograma e ECG.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-2">
-                  <GlowingButton
-                    href={getWhatsAppUrl("Olá! Gostaria de agendar uma consulta com o Dr. Cleiterson no Núcleo Cardiológico.")}
-                    target="_blank"
-                    variant="blue"
-                    size="md"
-                  >
-                    <span>Falar com Nossa Recepção</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </GlowingButton>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 7. DIFERENCIAIS DA CLÍNICA */}
-        <section id="diferenciais" className="py-16 sm:py-24 bg-white">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-16">
-              <span className="eyebrow-blue">Por que escolher o Núcleo Cardiológico</span>
-              <h2 className="font-heading text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-                Diferenciais que fazem toda a diferença para o seu coração.
-              </h2>
-              <p className="text-base text-slate-600 leading-relaxed">
-                Descubra por que dezenas de famílias confiam no Núcleo Cardiológico Integrado há tantos anos.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {diferenciais.map((dif, idx) => {
-                const IconComp = dif.icon;
-                return (
-                  <div
-                    key={idx}
-                    className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6 sm:p-7 transition-all duration-300 hover:bg-white hover:border-[#01499a]/30 hover:shadow-lg"
-                  >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white border border-slate-200 text-[#01499a] shadow-xs mb-5">
-                      <IconComp className="h-6 w-6 text-[#01499a]" />
-                    </div>
-                    <h3 className="font-heading text-lg font-bold text-slate-900 mb-2">
-                      {dif.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {dif.desc}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* 8. DEPOIMENTOS REAIS DO GOOGLE MEU NEGÓCIO */}
-        <section id="avaliacoes" className="py-16 sm:py-24 bg-[#f0f7ff]/70 border-y border-sky-100">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-16">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1 text-xs font-bold text-slate-800 shadow-xs border border-slate-200">
-                <GoogleIcon size={16} />
-                <span>Avaliações Reais no Google</span>
-              </div>
-              <h2 className="font-heading text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-                O que dizem os pacientes que cuidam do coração conosco.
-              </h2>
-              <p className="text-base text-slate-600 leading-relaxed">
-                A opinião transparente e espontânea de quem confia sua saúde ao Dr. Cleiterson e à nossa equipe médica em Mateus Leme.
-              </p>
-            </div>
-
-            {/* Grid de Depoimentos Reais */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {depoimentosGoogle.map((review, idx) => (
-                <div
-                  key={idx}
-                  className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md"
-                >
-                  <div className="space-y-3">
-                    {/* Estrelas & Data */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex text-amber-400">
-                        {[...Array(review.rating)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 fill-amber-400" />
-                        ))}
-                      </div>
-                      <span className="text-[11px] text-slate-400 font-medium">
-                        {review.date}
-                      </span>
-                    </div>
-
-                    {/* Texto do Depoimento */}
-                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic">
-                      &ldquo;{review.text}&rdquo;
-                    </p>
-                  </div>
-
-                  {/* Autor & Contexto */}
-                  <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <div>
-                      <div className="flex items-center gap-1.5">
-                        <p className="text-xs font-bold text-slate-900">{review.name}</p>
-                        {review.badge && (
-                          <span className="rounded bg-sky-100 px-1.5 py-0.2 text-[9px] font-bold text-[#01499a]">
-                            {review.badge}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-[11px] text-slate-500">{review.detail}</p>
-                    </div>
-                    <GoogleIcon size={16} className="text-slate-400 shrink-0" />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Link para o Google Maps */}
-            <div className="mt-10 text-center">
-              <a
-                href={GOOGLE_REVIEWS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#01499a] hover:underline"
-              >
-                <GoogleIcon size={18} />
-                <span>Ver todas as avaliações do Núcleo Cardiológico no Google</span>
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* 9. CARD CTA INTERMEDIÁRIO DE CONVERSÃO */}
-        <section className="py-16 sm:py-20 bg-white">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#dd0101] via-[#b91c1c] to-[#013b7e] p-8 sm:p-12 text-white shadow-2xl text-center space-y-6">
-              {/* Background decorative ECG pulse line */}
-              <div className="pointer-events-none absolute inset-0 opacity-10 flex items-center justify-center">
-                <svg className="w-full h-40" viewBox="0 0 1000 200" fill="none" stroke="currentColor">
-                  <path
-                    d="M 0 100 L 300 100 L 330 70 L 350 130 L 380 20 L 410 180 L 440 80 L 460 110 L 480 100 L 1000 100"
-                    strokeWidth="4"
-                  />
-                </svg>
-              </div>
-
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/20 px-3.5 py-1 text-xs font-bold text-white backdrop-blur-xs">
-                <Heart className="h-3.5 w-3.5 fill-white" />
-                <span>Prevenção Salva Vidas</span>
-              </div>
-
-              <h2 className="font-heading text-2xl sm:text-4xl font-black text-white tracking-tight max-w-2xl mx-auto leading-tight">
-                Não deixe para depois os cuidados com a saúde do seu coração.
-              </h2>
-
-              <p className="text-xs sm:text-base text-red-100 max-w-xl mx-auto leading-relaxed">
-                Sentindo cansaço, palpitações ou precisa de acompanhamento para pressão alta? Fale com a equipe do Núcleo Cardiológico Integrado agora mesmo.
+              {/* Subtitle / Value Proposition */}
+              <p className="mt-5 text-base leading-relaxed text-slate-600 sm:text-lg">
+                Consultas médicas humanizadas, acompanhamento da longevidade ativa e diagnósticos precisos no coração de Mateus Leme. Cuidado multiprofissional para você e sua família viverem cada momento com vitalidade, independência e bem-estar.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+              {/* Action Buttons */}
+              <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
                 <GlowingButton
-                  href={getWhatsAppUrl("Olá! Gostaria de agendar uma consulta cardiológica no Núcleo Cardiológico Integrado.")}
+                  href={getWhatsAppUrl("Olá! Gostaria de agendar uma consulta no Saúde Master Centro Médico.")}
                   target="_blank"
-                  variant="whatsapp"
                   size="lg"
-                  className="w-full sm:w-auto"
+                  variant="green"
+                  className="pulse-medical"
                 >
                   <WhatsAppIcon size={20} />
                   <span>Agendar Consulta no WhatsApp</span>
                 </GlowingButton>
 
                 <GlowingButton
-                  href="tel:3135351014"
-                  variant="white"
+                  href="#especialidades"
                   size="lg"
-                  className="w-full sm:w-auto"
+                  variant="outline"
+                  className="border-emerald-600 text-[#14532d] hover:bg-emerald-50"
                 >
-                  <Phone className="h-4 w-4" />
-                  <span>Ligar: (31) 3535-1014</span>
+                  <span>Conhecer Especialidades</span>
+                  <ArrowRight size={18} />
                 </GlowingButton>
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* 10. FAQ - PERGUNTAS FREQUENTES */}
-        <section id="faq" className="py-16 sm:py-24 bg-slate-50 border-t border-slate-200">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center space-y-3 mb-12 sm:mb-16">
-              <span className="eyebrow-blue">Tire Suas Dúvidas</span>
-              <h2 className="font-heading text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-                Perguntas Frequentes sobre Consultas &amp; Exames
-              </h2>
-              <p className="text-base text-slate-600 leading-relaxed">
-                Tudo o que você precisa saber sobre o atendimento no Núcleo Cardiológico Integrado.
-              </p>
-            </div>
+              {/* Quick Contact & Address Snippet */}
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-600 font-medium">
+                <span className="inline-flex items-center gap-1.5 text-[#14532d] font-bold">
+                  <MapPin className="h-4 w-4 text-[#16a34a]" />
+                  <span>Rua Dr. Tomás de Andrade, 686 · Centro</span>
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-slate-700">
+                  <Phone className="h-4 w-4 text-[#16a34a]" />
+                  <span>(31) 9 9619-6155 · (31) 9 9992-2456</span>
+                </span>
+              </div>
 
-            <div className="space-y-4">
-              {faqs.map((faq, index) => {
-                const isOpen = activeFaq === index;
-                return (
-                  <div
-                    key={index}
-                    className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all shadow-xs"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => setActiveFaq(isOpen ? null : index)}
-                      className="flex w-full items-center justify-between p-5 sm:p-6 text-left text-sm sm:text-base font-bold text-slate-900 hover:text-[#01499a] transition-colors gap-4"
-                    >
-                      <span>{faq.q}</span>
-                      <ChevronDown
-                        className={`h-5 w-5 text-slate-400 shrink-0 transition-transform duration-200 ${
-                          isOpen ? "rotate-180 text-[#01499a]" : ""
-                        }`}
-                      />
-                    </button>
-                    <AnimatePresence>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.25 }}
-                          className="border-t border-slate-100 px-5 sm:px-6 pb-6 pt-3 text-xs sm:text-sm text-slate-600 leading-relaxed"
-                        >
-                          {faq.a}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+              {/* Trust Badges Grid */}
+              <div className="mt-10 grid grid-cols-2 gap-4 border-t border-slate-200/90 pt-8 sm:grid-cols-4">
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-1 text-amber-500 font-extrabold text-lg">
+                    <span>4,9</span>
+                    <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
                   </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* 11. LOCALIZAÇÃO & CONTATO */}
-        <section id="contato" className="py-16 sm:py-24 bg-white border-t border-slate-200">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-              {/* Informações de Contato */}
-              <div className="lg:col-span-5 space-y-6">
-                <div className="space-y-3">
-                  <span className="eyebrow-red">Como Chegar &amp; Contato</span>
-                  <h2 className="font-heading text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-                    Estamos no coração de Mateus Leme esperando por você.
-                  </h2>
-                  <p className="text-base text-slate-600 leading-relaxed">
-                    Localização central, com facilidade de acesso, recepção climatizada e toda a atenção que o seu coração merece.
-                  </p>
+                  <span className="text-xs font-semibold text-slate-700 mt-0.5">
+                    Avaliações no Google
+                  </span>
+                  <span className="text-[11px] text-slate-600">Reconhecimento real</span>
                 </div>
 
-                <div className="space-y-4 text-xs sm:text-sm">
-                  <div className="flex items-start gap-3.5 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                    <MapPin className="h-5 w-5 text-[#dd0101] shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-bold text-slate-900">Endereço da Clínica:</p>
-                      <p className="text-slate-600">{ADDRESS_TEXT}</p>
-                      <p className="text-[11px] text-[#01499a] font-semibold mt-1">
-                        Centro · Mateus Leme / MG · CEP 35670-000
+                <div className="flex flex-col">
+                  <span className="text-lg font-extrabold text-[#14532d]">
+                    +15 Especialidades
+                  </span>
+                  <span className="text-xs font-semibold text-slate-700 mt-0.5">
+                    Corpo Clínico Amplo
+                  </span>
+                  <span className="text-[11px] text-slate-600">Em um só local</span>
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="text-lg font-extrabold text-[#14532d]">
+                    Sem Espera
+                  </span>
+                  <span className="text-xs font-semibold text-slate-700 mt-0.5">
+                    Pontualidade
+                  </span>
+                  <span className="text-[11px] text-slate-600">Respeito ao seu tempo</span>
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="text-lg font-extrabold text-[#14532d]">
+                    Convênios &amp; Part.
+                  </span>
+                  <span className="text-xs font-semibold text-slate-700 mt-0.5">
+                    Acesso Facilitado
+                  </span>
+                  <span className="text-[11px] text-slate-600">Valores justos</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right Visual Column (Photos & Official Campaign Imagery) */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeInUp}
+              className="lg:col-span-5"
+            >
+              <div className="relative mx-auto max-w-md lg:max-w-none">
+                {/* Main Card Frame */}
+                <div className="relative overflow-hidden rounded-3xl border border-emerald-200 bg-white p-3 shadow-2xl shadow-emerald-950/10">
+                  {/* Photo of the 3 Seniors (Autonomy & Healthy Aging) */}
+                  <div className="relative h-80 sm:h-96 w-full overflow-hidden rounded-2xl bg-emerald-50">
+                    <Image
+                      src={SENIORS_SRC}
+                      alt="Envelhecer bem é viver com autonomia - Pacientes saudáveis da Saúde Master"
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 480px"
+                      className="object-cover object-center"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#052e16]/80 via-transparent to-transparent" />
+                    
+                    {/* Overlay Tagline inside image */}
+                    <div className="absolute bottom-4 left-4 right-4 text-white">
+                      <p className="text-xs font-bold uppercase tracking-wider text-emerald-300">
+                        Campanha Oficial Saúde Master
+                      </p>
+                      <p className="mt-1 font-heading text-lg font-extrabold leading-snug">
+                        "Envelhecer bem é viver com autonomia."
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3.5 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                    <Clock className="h-5 w-5 text-[#01499a] shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-bold text-slate-900">Horário de Atendimento:</p>
-                      <p className="text-slate-600">
-                        Segunda a Sexta: <strong>07:30 às 18:00</strong>
-                      </p>
-                      <p className="text-slate-600">
-                        Sábado: <strong>08:00 às 12:00</strong>
-                      </p>
-                    </div>
-                  </div>
+                  {/* Bottom Campaign Mini Card (Replica of Flyer Bottom) */}
+                  <div className="mt-3 rounded-2xl border border-emerald-100 bg-[#f0fdf4] p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="min-w-0">
+                        <span className="inline-flex items-center gap-1 rounded-md bg-[#14532d] px-2.5 py-1 text-xs font-extrabold text-white">
+                          AGENDE AGORA
+                        </span>
+                        <p className="mt-1.5 text-xs font-bold text-slate-900 truncate">
+                          Dr. Tomás de Andrade, 686 · Centro
+                        </p>
+                        <p className="text-[11px] text-emerald-800 font-semibold">
+                          (31) 9 9619-6155 · (31) 9 9992-2456
+                        </p>
+                      </div>
 
-                  <div className="flex items-start gap-3.5 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                    <Phone className="h-5 w-5 text-[#01499a] shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-bold text-slate-900">Telefones para Agendamento:</p>
-                      <p className="text-slate-600">
-                        WhatsApp: <strong>{PHONE_DISPLAY}</strong>
-                      </p>
-                      <p className="text-slate-600">
-                        Fixo: <strong>{PHONE_FIXO_DISPLAY}</strong>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3.5 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                    <InstagramIcon size={20} className="text-[#dd0101] shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-bold text-slate-900">Instagram Oficial:</p>
                       <a
-                        href={INSTAGRAM_URL}
+                        href={getWhatsAppUrl("Olá! Gostaria de agendar meu horário pelo WhatsApp.")}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#01499a] font-semibold hover:underline"
+                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#25D366] text-white shadow-md hover:scale-105 transition-transform"
+                        aria-label="Agendar via WhatsApp"
                       >
-                        {INSTAGRAM_HANDLE}
+                        <WhatsAppIcon size={24} />
                       </a>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <GlowingButton
-                    href={GOOGLE_MAPS_URL}
-                    target="_blank"
-                    variant="blue"
-                    size="md"
-                  >
-                    <MapPin className="h-4 w-4" />
-                    <span>Abrir no Google Maps</span>
-                  </GlowingButton>
+                {/* Floating Badge: Autonomia & Longevidade */}
+                <div className="absolute -bottom-5 -left-4 sm:-bottom-6 sm:-left-6 rounded-2xl border border-emerald-200 bg-white p-3.5 shadow-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-[#15803d]">
+                      <Smile className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-extrabold text-slate-900">
+                        Longevidade com Vitalidade
+                      </p>
+                      <p className="text-[11px] text-slate-600">
+                        Geriatria &amp; Saúde Integrada
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
-                  <GlowingButton
-                    href={getWhatsAppUrl("Olá! Gostaria de agendar uma consulta no Núcleo Cardiológico.")}
-                    target="_blank"
-                    variant="whatsapp"
-                    size="md"
-                  >
-                    <WhatsAppIcon size={18} />
-                    <span>WhatsApp</span>
-                  </GlowingButton>
+      {/* 4. IMPACT STRIP (4 PILARES DE EXCELÊNCIA RÁPIDA) */}
+      <section className="border-y border-emerald-950/10 bg-gradient-to-r from-[#052e16] via-[#14532d] to-[#166534] py-8 text-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="flex items-start gap-3.5">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-400/20 text-emerald-300">
+                <UserCheck className="h-6 w-6" />
+              </div>
+              <div>
+                <h2 className="font-heading text-sm font-bold text-white">
+                  Atendimento Humanizado
+                </h2>
+                <p className="mt-1 text-xs text-emerald-100/90 leading-relaxed">
+                  Médicos e equipe que ouvem sem pressa e cuidam com respeito a cada paciente.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3.5">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-400/20 text-emerald-300">
+                <Stethoscope className="h-6 w-6" />
+              </div>
+              <div>
+                <h2 className="font-heading text-sm font-bold text-white">
+                  Mais de 15 Especialidades
+                </h2>
+                <p className="mt-1 text-xs text-emerald-100/90 leading-relaxed">
+                  Geriatria, Clínica Geral, Cardiologia, Ortopedia, Ginecologia e muito mais.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3.5">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-400/20 text-emerald-300">
+                <Clock className="h-6 w-6" />
+              </div>
+              <div>
+                <h2 className="font-heading text-sm font-bold text-white">
+                  Respeito à Sua Agenda
+                </h2>
+                <p className="mt-1 text-xs text-emerald-100/90 leading-relaxed">
+                  Organização rigorosa de horários para evitar esperas cansativas.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3.5">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-400/20 text-emerald-300">
+                <MapPin className="h-6 w-6" />
+              </div>
+              <div>
+                <h2 className="font-heading text-sm font-bold text-white">
+                  Centro de Mateus Leme
+                </h2>
+                <p className="mt-1 text-xs text-emerald-100/90 leading-relaxed">
+                  Rua Dr. Tomás de Andrade, 686, com fácil acesso para idosos e famílias.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. ESPECIALIDADES MÉDICAS & EXAMES */}
+      <section id="especialidades" className="py-16 sm:py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="eyebrow-green">Cuidado Integral</span>
+            <h2 className="mt-2 font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              Especialidades Médicas &amp; Exames
+            </h2>
+            <p className="mt-4 text-base text-slate-600 sm:text-lg">
+              Um corpo clínico preparado para acolher sua saúde em todas as etapas da vida, com acompanhamento integrado e diagnóstico de confiança.
+            </p>
+          </div>
+
+          {/* Grid of Specialty Cards - Inicialmente 4 visíveis com botão Ver Mais */}
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {(showAllSpecialties ? especialidades : especialidades.slice(0, 4)).map((esp) => {
+              const IconComp = esp.icon;
+              return (
+                <motion.div
+                  key={esp.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-md hover:shadow-emerald-950/5"
+                >
+                  <div>
+                    {/* Top Tag & Badge */}
+                    <div className="flex items-center justify-between gap-2">
+                      <span className={`text-[10px] font-bold uppercase tracking-wider ${esp.tagColor || "text-[#15803d]"}`}>
+                        {esp.tag}
+                      </span>
+                      {esp.badge && (
+                        <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[9px] font-extrabold text-[#14532d]">
+                          {esp.badge}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Title with Thematic Colored Icon */}
+                    <div className="mt-3 flex items-center gap-2.5">
+                      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-all ${esp.iconStyle || "bg-emerald-50 text-emerald-600 border-emerald-200"}`}>
+                        <IconComp className="h-5 w-5" />
+                      </div>
+                      <h3 className="font-heading text-sm font-bold text-slate-900 leading-snug">
+                        {esp.name}
+                      </h3>
+                    </div>
+
+                    {/* Short Punchy Description */}
+                    <p className="mt-2.5 text-xs text-slate-600 leading-relaxed">
+                      {esp.desc}
+                    </p>
+
+                    {/* Minimal Pills */}
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {esp.pills.map((pill, i) => (
+                        <span
+                          key={i}
+                          className="rounded-md bg-slate-50 border border-slate-200/60 px-2 py-0.5 text-[10px] font-medium text-slate-600"
+                        >
+                          {pill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Card Action Link */}
+                  <div className="mt-4 pt-3 border-t border-slate-100">
+                    <a
+                      href={getWhatsAppUrl(esp.whatsappMsg)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full items-center justify-between text-xs font-bold text-[#14532d] hover:text-[#16a34a] transition-colors"
+                    >
+                      <span className="inline-flex items-center gap-1.5">
+                        <WhatsAppIcon size={14} className="text-[#16a34a]" />
+                        <span>Agendar Horário</span>
+                      </span>
+                      <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                    </a>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Botão Ver Mais / Ver Menos Especialidades */}
+          <div className="mt-8 text-center">
+            <button
+              type="button"
+              onClick={() => setShowAllSpecialties(!showAllSpecialties)}
+              className="inline-flex items-center gap-2 rounded-xl border border-emerald-300 bg-emerald-50/80 px-6 py-3 text-xs font-bold text-[#14532d] shadow-xs hover:bg-[#14532d] hover:text-white transition-all cursor-pointer"
+            >
+              <span>
+                {showAllSpecialties
+                  ? "Ver menos especialidades"
+                  : `Ver mais especialidades (+${especialidades.length - 4})`}
+              </span>
+              <ChevronDown
+                size={16}
+                className={`transition-transform duration-200 ${
+                  showAllSpecialties ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+          </div>
+
+          {/* Bottom Specialty Callout */}
+          <div className="mt-12 rounded-3xl border border-emerald-200 bg-gradient-to-r from-[#f0fdf4] via-emerald-50 to-[#f0fdf4] p-6 sm:p-8 text-center">
+            <h3 className="font-heading text-xl font-extrabold text-slate-900 sm:text-2xl">
+              Não encontrou a especialidade ou exame que você procura?
+            </h3>
+            <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-slate-600">
+              Nossa equipe médica conta com diversos profissionais em constante rotação. Entre em contato com a recepção pelo WhatsApp para checar disponibilidade de datas e horários.
+            </p>
+            <div className="mt-5">
+              <GlowingButton
+                href={getWhatsAppUrl("Olá! Gostaria de consultar a disponibilidade de uma especialidade / médico no Saúde Master Centro Médico.")}
+                target="_blank"
+                size="md"
+                variant="green"
+              >
+                <WhatsAppIcon size={18} />
+                <span>Consultar Especialidades no WhatsApp</span>
+              </GlowingButton>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. SEÇÃO ESPECIAL: LONGEVIDADE COM AUTONOMIA */}
+      <section
+        id="autonomia"
+        className="relative overflow-hidden bg-gradient-to-b from-[#f0fdf4] to-white py-16 sm:py-24"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+            {/* Visual Column: Flyer Presentation */}
+            <div className="lg:col-span-5">
+              <div className="relative mx-auto max-w-sm rounded-3xl border-2 border-emerald-200 bg-white p-2.5 shadow-2xl shadow-emerald-950/10">
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-emerald-50">
+                  <Image
+                    src={FLYER_SRC}
+                    alt="Campanha Saúde Master - Envelhecer bem é viver com autonomia"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 420px"
+                    className="object-contain"
+                  />
+                </div>
+                <div className="p-3 text-center">
+                  <p className="text-xs font-bold text-slate-900">
+                    Campanha de Conscientização &amp; Saúde
+                  </p>
+                  <p className="text-[11px] text-slate-600">
+                    Saúde Master Centro de Especialidades Médicas
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Narrative Column */}
+            <div className="lg:col-span-7">
+              <span className="eyebrow-green">Filosofia de Cuidado</span>
+              <h2 className="mt-2 font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                O que significa envelhecer com autonomia?
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-600">
+                Significa chegar aos 60, 70 ou 80 anos mantendo o poder de tomar as próprias decisões, fazer compras, passear com os netos, cozinhar a comida favorita e acordar com energia e disposição.
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-slate-600">
+                O processo natural de envelhecimento não precisa ser sinônimo de perdas. Com o acompanhamento médico adequado, é perfeitamente possível proteger a mobilidade, manter a mente afiada e prevenir doenças antes que elas limitem a sua rotina.
+              </p>
+
+              {/* 4 Pilares da Autonomia */}
+              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-xs">
+                  <div className="flex items-center gap-2.5 text-[#14532d] font-bold text-sm">
+                    <CheckCircle2 className="h-5 w-5 text-[#16a34a]" />
+                    <span>Revisão Farmacológica Segura</span>
+                  </div>
+                  <p className="mt-1.5 text-xs text-slate-600 leading-relaxed">
+                    Ajuste de doses e eliminação de remédios desnecessários para evitar tonturas, quedas e interações perigosas.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-xs">
+                  <div className="flex items-center gap-2.5 text-[#14532d] font-bold text-sm">
+                    <CheckCircle2 className="h-5 w-5 text-[#16a34a]" />
+                    <span>Saúde Muscular &amp; Articular</span>
+                  </div>
+                  <p className="mt-1.5 text-xs text-slate-600 leading-relaxed">
+                    Acompanhamento ortopédico para manter ossos fortes, postura firme e caminhar com segurança.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-xs">
+                  <div className="flex items-center gap-2.5 text-[#14532d] font-bold text-sm">
+                    <CheckCircle2 className="h-5 w-5 text-[#16a34a]" />
+                    <span>Vitalidade Cognitiva &amp; Memória</span>
+                  </div>
+                  <p className="mt-1.5 text-xs text-slate-600 leading-relaxed">
+                    Estímulo neurológico e emocional para manter raciocínio rápido, memória preservada e bom humor.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-xs">
+                  <div className="flex items-center gap-2.5 text-[#14532d] font-bold text-sm">
+                    <CheckCircle2 className="h-5 w-5 text-[#16a34a]" />
+                    <span>Acolhimento da Família</span>
+                  </div>
+                  <p className="mt-1.5 text-xs text-slate-600 leading-relaxed">
+                    Orientações claras para filhos e cuidadores saberem exatamente como apoiar sem retirar a independência.
+                  </p>
                 </div>
               </div>
 
-              {/* Card Visual / Recepção & Mapa */}
-              <div className="lg:col-span-7">
-                <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-xl">
-                  <div className="relative aspect-[16/11] w-full">
-                    <Image
-                      src={RECEPCAO_SRC}
-                      alt="Recepção e instalações do Núcleo Cardiológico Integrado em Mateus Leme"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 700px"
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/30 to-transparent" />
+              {/* CTA Button */}
+              <div className="mt-8">
+                <GlowingButton
+                  href={getWhatsAppUrl("Olá! Gostaria de agendar uma consulta focada na saúde do idoso / longevidade com autonomia.")}
+                  target="_blank"
+                  size="md"
+                  variant="green"
+                >
+                  <WhatsAppIcon size={18} />
+                  <span>Agendar Consulta de Longevidade</span>
+                </GlowingButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                    <div className="absolute bottom-6 left-6 right-6 text-white space-y-2">
-                      <div className="inline-flex items-center gap-2 rounded-full bg-[#dd0101] px-3.5 py-1 text-xs font-bold text-white shadow-md">
-                        <MapPin className="h-3.5 w-3.5" />
-                        <span>Rua Dr. Tomás de Andrade, 139</span>
-                      </div>
-                      <h3 className="font-heading text-xl sm:text-2xl font-black text-white">
-                        Núcleo Cardiológico Integrado
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-200 max-w-lg">
-                        Bem no Centro de Mateus Leme - MG, com estrutura acessível para toda a família.
-                      </p>
-                      <div className="pt-2 flex flex-wrap gap-3">
-                        <a
-                          href={GOOGLE_MAPS_URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3.5 py-2 text-xs font-bold text-slate-900 hover:bg-slate-100 transition-colors shadow"
-                        >
-                          <GoogleIcon size={16} />
-                          <span>Como Chegar (GPS)</span>
-                        </a>
-                        <a
-                          href="https://waze.com/ul?q=Rua+Dr+Tomas+de+Andrade+139+Mateus+Leme"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-lg bg-white/20 backdrop-blur-md px-3.5 py-2 text-xs font-bold text-white hover:bg-white/30 transition-colors"
-                        >
-                          <span>Abrir no Waze</span>
-                        </a>
-                      </div>
-                    </div>
+      {/* 7. SOBRE A CLÍNICA & ESTRUTURA */}
+      <section id="sobre" className="py-16 sm:py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+            {/* Left Narrative Column */}
+            <div className="lg:col-span-7">
+              <span className="eyebrow-green">Nossa História &amp; Estrutura</span>
+              <h2 className="mt-2 font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                Saúde Master Centro Médico: Referência em Cuidado no Centro de Mateus Leme
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-600">
+                O <strong>Saúde Master Centro Médico</strong> nasceu com a missão de aproximar os melhores especialistas da população de Mateus Leme e região metropolitana, evitando que os pacientes precisem se deslocar para capitais em busca de atendimento de confiança.
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-slate-600">
+                Localizada estrategicamente na <strong>Rua Dr. Tomás de Andrade, 686</strong>, nossa clínica conta com consultórios modernos, recepção climatizada, equipe de enfermagem qualificada e rigorosos protocolos de assepsia e conforto.
+              </p>
+
+              {/* 3 Pillars */}
+              <div className="mt-6 space-y-3">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-[#15803d]">
+                    <Check className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900">
+                      Acessibilidade Completa para Idosos e Cadeirantes
+                    </h3>
+                    <p className="text-xs text-slate-600">
+                      Entrada plana, portas largas, banheiros adaptados e equipe sempre pronta para oferecer apoio.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-[#15803d]">
+                    <Check className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900">
+                      Ambiente Limpo, Seguro e Climatizado
+                    </h3>
+                    <p className="text-xs text-slate-600">
+                      Salas higienizadas com frequência, poltronas confortáveis e tranquilidade para sua espera.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-[#15803d]">
+                    <Check className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900">
+                      Atendimento Particular e Diversos Convênios
+                    </h3>
+                    <p className="text-xs text-slate-600">
+                      Flexibilidade nas formas de pagamento com cartão, PIX e cobertura para planos de saúde parceiros.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Images Column */}
+            <div className="lg:col-span-5">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="col-span-2 relative h-56 sm:h-64 w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-md">
+                  <Image
+                    src={RECEPCAO_SRC}
+                    alt="Recepção moderna e acolhedora da Saúde Master Centro Médico"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 480px"
+                    className="object-cover"
+                  />
+                  <div className="absolute bottom-2 left-2 rounded-md bg-white/90 px-2.5 py-1 text-[11px] font-bold text-slate-800 backdrop-blur-xs">
+                    Recepção Climatizada
+                  </div>
+                </div>
+
+                <div className="relative h-40 w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm">
+                  <Image
+                    src={INTERIOR_SRC}
+                    alt="Consultórios equipados da Saúde Master"
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 240px"
+                    className="object-cover"
+                  />
+                  <div className="absolute bottom-2 left-2 rounded-md bg-white/90 px-2 py-0.5 text-[10px] font-bold text-slate-800 backdrop-blur-xs">
+                    Consultórios
+                  </div>
+                </div>
+
+                <div className="relative h-40 w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm">
+                  <Image
+                    src={FACHADA_SRC}
+                    alt="Estrutura e localização da Saúde Master Centro Médico"
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 240px"
+                    className="object-cover"
+                  />
+                  <div className="absolute bottom-2 left-2 rounded-md bg-white/90 px-2 py-0.5 text-[10px] font-bold text-slate-800 backdrop-blur-xs">
+                    Acessibilidade
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
-      {/* 12. FOOTER COMPLETO */}
-      <footer className="border-t border-slate-800 bg-[#071d3d] text-slate-300 text-sm">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
-            {/* Coluna 1: Marca & Bio */}
-            <div className="lg:col-span-5 space-y-4">
-              <div className="relative h-14 w-52 bg-white/95 rounded-xl p-2 border border-white/20">
-                <Image
-                  src={LOGO_SRC}
-                  alt="Núcleo Cardiológico Integrado"
-                  fill
-                  sizes="220px"
-                  className="object-contain p-1"
-                />
+      {/* 8. DIFERENCIAIS ESTRATÉGICOS (6 CARDS) */}
+      <section id="diferenciais" className="py-16 sm:py-24 bg-[#f8fafc]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="eyebrow-green">Por Que Escolher a Saúde Master</span>
+            <h2 className="mt-2 font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              Diferenciais que Transformam a Sua Experiência
+            </h2>
+            <p className="mt-4 text-base text-slate-600 sm:text-lg">
+              Compromisso sério com o seu bem-estar, respeito à sua dignidade e facilidade de agendamento em Mateus Leme.
+            </p>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {diferenciais.map((dif, idx) => {
+              const IconComp = dif.icon;
+              return (
+                <div
+                  key={idx}
+                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs hover:border-emerald-300 hover:shadow-md transition-all"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-[#15803d] border border-emerald-100">
+                    <IconComp className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-4 font-heading text-base font-bold text-slate-900">
+                    {dif.title}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                    {dif.desc}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 9. PROVA SOCIAL & DEPOIMENTOS DE PACIENTES */}
+      <section id="depoimentos" className="py-16 sm:py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3.5 py-1 text-xs font-bold text-amber-800">
+              <GoogleIcon size={14} />
+              <span>Avaliação 4,9 ★★★★★ no Google Maps</span>
+            </div>
+            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              O Que Nossos Pacientes Dizem
+            </h2>
+            <p className="mt-4 text-base text-slate-600 sm:text-lg">
+              Histórias reais de quem confia a própria saúde e a de sua família ao Saúde Master Centro Médico.
+            </p>
+          </div>
+
+          {/* Testimonials Grid */}
+          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {depoimentos.map((dep, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-xs hover:border-emerald-200 hover:shadow-md transition-all"
+              >
+                <div>
+                  {/* Stars */}
+                  <div className="flex items-center gap-1">
+                    {[...Array(dep.rating)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="h-4 w-4 fill-amber-400 text-amber-400"
+                      />
+                    ))}
+                    <span className="ml-2 text-xs font-semibold text-slate-500">
+                      {dep.date}
+                    </span>
+                  </div>
+
+                  {/* Text */}
+                  <p className="mt-3 text-xs leading-relaxed text-slate-700 italic">
+                    "{dep.text}"
+                  </p>
+                </div>
+
+                <div className="mt-4 border-t border-slate-100 pt-3">
+                  <p className="text-xs font-bold text-slate-900">{dep.name}</p>
+                  <p className="text-[11px] text-[#15803d] font-semibold">{dep.detail}</p>
+                  <p className="text-[10px] text-slate-600">{dep.city}</p>
+                </div>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-                Clínica cardiológica especializada em Mateus Leme / MG. Cuidando da saúde do seu coração com tecnologia de ponta, exames diagnósticos precisos e a dedicação do Dr. Cleiterson e corpo clínico.
+            ))}
+          </div>
+
+          {/* Google CTA */}
+          <div className="mt-10 text-center">
+            <a
+              href={GOOGLE_REVIEWS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#15803d] transition-colors"
+            >
+              <GoogleIcon size={16} />
+              <span>Ver todas as avaliações no Google Meu Negócio</span>
+              <ArrowUpRight size={14} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. INTERMEDIATE CONVERSION BANNER (REPLICA DO FLYER: "AGENDE AGORA") */}
+      <section className="bg-gradient-to-r from-[#052e16] via-[#14532d] to-[#166534] py-12 sm:py-16 text-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl border border-emerald-400/30 bg-white/10 p-6 sm:p-10 backdrop-blur-md">
+            <div className="grid items-center gap-8 lg:grid-cols-12">
+              <div className="lg:col-span-8">
+                <span className="inline-flex items-center gap-2 rounded-full bg-emerald-400/20 px-3 py-1 text-xs font-extrabold text-emerald-300">
+                  <Smile className="h-4 w-4" />
+                  <span>Envelhecer bem é viver com autonomia.</span>
+                </span>
+                <h2 className="mt-4 font-heading text-2xl font-extrabold sm:text-3xl lg:text-4xl text-white">
+                  Pronto para cuidar da sua saúde com quem realmente se importa?
+                </h2>
+                <p className="mt-3 text-sm text-emerald-100 sm:text-base leading-relaxed">
+                  Agende sua consulta com facilidade pelo WhatsApp. Nossa equipe de recepção está disponível para te atender com prontidão, atenção e carinho.
+                </p>
+
+                {/* Contact Pills */}
+                <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs sm:text-sm text-emerald-100 font-semibold">
+                  <span className="inline-flex items-center gap-2">
+                    <MapPin className="h-4 w-4 text-emerald-300" />
+                    <span>Dr. Tomás de Andrade, 686 - Centro, Mateus Leme</span>
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <Phone className="h-4 w-4 text-emerald-300" />
+                    <span>(31) 9 9619-6155 · (31) 9 9992-2456</span>
+                  </span>
+                </div>
+              </div>
+
+              <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
+                <GlowingButton
+                  href={getWhatsAppUrl("Olá! Vi a campanha no site e gostaria de agendar uma consulta no Saúde Master Centro Médico.")}
+                  target="_blank"
+                  size="lg"
+                  variant="whatsapp"
+                  className="w-full text-center"
+                >
+                  <WhatsAppIcon size={20} />
+                  <span>AGENDE AGORA (WhatsApp)</span>
+                </GlowingButton>
+
+                <GlowingButton
+                  href="tel:3135352459"
+                  size="md"
+                  variant="outline-white"
+                  className="w-full text-center"
+                >
+                  <Phone size={16} />
+                  <span>Ligar no Fixo: {PHONE_FIXO_DISPLAY}</span>
+                </GlowingButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 11. FAQ / PERGUNTAS FREQUENTES */}
+      <section id="faq" className="py-16 sm:py-24 bg-white">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <span className="eyebrow-green">Tire Suas Dúvidas</span>
+            <h2 className="mt-2 font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              Perguntas Frequentes
+            </h2>
+            <p className="mt-4 text-base text-slate-600">
+              Respostas claras para as principais perguntas sobre consultas, especialidades e agendamentos.
+            </p>
+          </div>
+
+          <div className="mt-10 space-y-3">
+            {faqs.map((faq, idx) => {
+              const isOpen = activeFaq === idx;
+              return (
+                <div
+                  key={idx}
+                  className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setActiveFaq(isOpen ? null : idx)}
+                    className="flex w-full items-center justify-between gap-4 p-5 text-left font-heading text-sm sm:text-base font-bold text-slate-900 hover:text-[#15803d]"
+                  >
+                    <span>{faq.q}</span>
+                    <ChevronDown
+                      className={`h-5 w-5 shrink-0 text-slate-400 transition-transform duration-200 ${
+                        isOpen ? "rotate-180 text-[#15803d]" : ""
+                      }`}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="border-t border-slate-100 px-5 pt-3 pb-5 text-xs sm:text-sm leading-relaxed text-slate-600">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-8 text-center text-xs text-slate-500">
+            Ainda com alguma dúvida específica?{" "}
+            <a
+              href={getWhatsAppUrl("Olá! Gostaria de tirar uma dúvida sobre o Saúde Master Centro Médico.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-[#15803d] hover:underline"
+            >
+              Fale diretamente com nossa recepção no WhatsApp &rarr;
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 12. LOCALIZAÇÃO & CONTATO */}
+      <section id="contato" className="py-16 sm:py-24 bg-[#f8fafc]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+            {/* Contact Details Column */}
+            <div className="lg:col-span-6">
+              <span className="eyebrow-green">Fácil Acesso</span>
+              <h2 className="mt-2 font-heading text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                Como Chegar ao Saúde Master Centro Médico
+              </h2>
+              <p className="mt-4 text-base text-slate-600 leading-relaxed">
+                Estamos no coração de Mateus Leme, com facilidade para estacionamento rápido, desembarque de idosos e proximidade aos principais pontos da cidade.
               </p>
-              <div className="flex items-center gap-3 pt-2">
+
+              {/* Info Cards */}
+              <div className="mt-8 space-y-4">
+                <div className="flex items-start gap-3.5 rounded-2xl border border-slate-200 bg-white p-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-[#15803d]">
+                    <MapPin className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                      Endereço Completo
+                    </h3>
+                    <p className="mt-0.5 text-sm font-bold text-slate-900">
+                      {ADDRESS_TEXT}
+                    </p>
+                    <p className="text-xs text-slate-600 mt-0.5">
+                      Ponto central e de fácil localização em Mateus Leme - MG
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3.5 rounded-2xl border border-slate-200 bg-white p-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-[#15803d]">
+                    <Clock className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                      Horário de Funcionamento
+                    </h3>
+                    <p className="mt-0.5 text-sm font-bold text-slate-900">
+                      Segunda a Sexta: 07h30 às 18h00
+                    </p>
+                    <p className="text-xs text-slate-600">
+                      Sábado: 08h00 às 12h00 (mediante agendamento)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3.5 rounded-2xl border border-slate-200 bg-white p-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-[#15803d]">
+                    <Phone className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                      Canais de Atendimento
+                    </h3>
+                    <p className="mt-0.5 text-sm font-bold text-slate-900">
+                      WhatsApp: {PHONE_DISPLAY} · {PHONE_SEC_DISPLAY}
+                    </p>
+                    <p className="text-xs text-slate-600">
+                      Telefone Fixo: {PHONE_FIXO_DISPLAY}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Map Action Buttons */}
+              <div className="mt-6 flex flex-wrap gap-3">
                 <a
-                  href={INSTAGRAM_URL}
+                  href={GOOGLE_MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Instagram do Núcleo Cardiológico"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-800 text-slate-300 hover:bg-[#dd0101] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-bold text-white hover:bg-slate-800 transition-colors"
                 >
-                  <InstagramIcon size={16} />
+                  <MapPin size={14} />
+                  <span>Abrir no Google Maps</span>
                 </a>
+
                 <a
-                  href={getWhatsAppUrl()}
+                  href={`https://waze.com/ul?q=${encodeURIComponent(ADDRESS_TEXT)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="WhatsApp do Núcleo Cardiológico"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-800 text-slate-300 hover:bg-emerald-600 hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors"
                 >
-                  <WhatsAppIcon size={16} />
-                </a>
-                <a
-                  href={GOOGLE_REVIEWS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Google Reviews"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-800 text-slate-300 hover:bg-blue-600 hover:text-white transition-colors"
-                >
-                  <GoogleIcon size={16} />
+                  <span>Navegar pelo Waze</span>
+                  <ArrowUpRight size={14} />
                 </a>
               </div>
             </div>
 
-            {/* Coluna 2: Exames & Especialidades */}
-            <div className="lg:col-span-3 space-y-3">
-              <p className="font-heading text-sm font-bold text-white uppercase tracking-wider">
-                Exames &amp; Consultas
-              </p>
-              <ul className="space-y-2 text-xs text-slate-400">
-                <li>
-                  <a href="#exames" className="hover:text-white transition-colors">
-                    Consulta Cardiológica Especializada
-                  </a>
-                </li>
-                <li>
-                  <a href="#exames" className="hover:text-white transition-colors">
-                    Holter 24 Horas Digital
-                  </a>
-                </li>
-                <li>
-                  <a href="#exames" className="hover:text-white transition-colors">
-                    M.A.P.A. 24 Horas (Pressão Arterial)
-                  </a>
-                </li>
-                <li>
-                  <a href="#exames" className="hover:text-white transition-colors">
-                    Eletrocardiograma (ECG)
-                  </a>
-                </li>
-                <li>
-                  <a href="#exames" className="hover:text-white transition-colors">
-                    Ecocardiograma Transtorácico Doppler
-                  </a>
-                </li>
-                <li>
-                  <a href="#exames" className="hover:text-white transition-colors">
-                    Avaliação de Risco Cirúrgico
-                  </a>
-                </li>
-                <li>
-                  <a href="#exames" className="hover:text-white transition-colors">
-                    Check-up Cardiovascular Preventivo
-                  </a>
-                </li>
-              </ul>
-            </div>
+            {/* Visual Column: Clinic Map & Facade */}
+            <div className="lg:col-span-6">
+              <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-3 shadow-lg">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100">
+                  <Image
+                    src={FACHADA_SRC}
+                    alt="Saúde Master Centro Médico em Mateus Leme"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 560px"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <p className="text-xs font-bold uppercase tracking-wider text-emerald-300">
+                      Saúde Master Centro Médico
+                    </p>
+                    <p className="font-heading text-base font-extrabold">
+                      Rua Dr. Tomás de Andrade, 686 · Centro
+                    </p>
+                  </div>
+                </div>
 
-            {/* Coluna 3: Atendimento & Horário */}
-            <div className="lg:col-span-4 space-y-3">
-              <p className="font-heading text-sm font-bold text-white uppercase tracking-wider">
-                Contato &amp; Funcionamento
-              </p>
-              <div className="space-y-2 text-xs text-slate-400">
-                <p>
-                  📍 <strong className="text-slate-200">Endereço:</strong> {ADDRESS_TEXT}
-                </p>
-                <p>
-                  📞 <strong className="text-slate-200">Telefone Fixo:</strong> {PHONE_FIXO_DISPLAY}
-                </p>
-                <p>
-                  📲 <strong className="text-slate-200">WhatsApp:</strong> {PHONE_DISPLAY}
-                </p>
-                <p>
-                  ✉️ <strong className="text-slate-200">E-mail:</strong> {EMAIL_CONTACT}
-                </p>
-                <div className="pt-2 border-t border-slate-800 text-slate-400">
-                  <p className="font-semibold text-slate-300">Horários:</p>
-                  <p>Segunda a Sexta: 07:30 às 18:00</p>
-                  <p>Sábado: 08:00 às 12:00</p>
+                <div className="mt-3 flex items-center justify-between gap-3 p-2">
+                  <div className="flex items-center gap-2 text-xs text-slate-600 font-medium">
+                    <span className="h-2 w-2 rounded-full bg-[#16a34a]" />
+                    <span>Estacionamento e fácil embarque de pacientes</span>
+                  </div>
+
+                  <a
+                    href={getWhatsAppUrl("Olá! Gostaria de confirmar o endereço para ir à clínica.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-bold text-[#15803d] hover:underline"
+                  >
+                    Confirmar Trajeto &rarr;
+                  </a>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Linha de Copyright & Ética Médica */}
-          <div className="mt-12 pt-8 border-t border-slate-800 text-center sm:flex sm:items-center sm:justify-between text-[11px] text-slate-500">
+      {/* 13. FOOTER INSTITUCIONAL COMPLETO */}
+      <footer className="border-t border-slate-200 bg-[#052e16] text-white">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-12">
+            {/* Brand Column */}
+            <div className="lg:col-span-4">
+              <div className="relative h-12 w-48 brightness-0 invert">
+                <Image
+                  src={LOGO_SRC}
+                  alt="Saúde Master Centro Médico"
+                  fill
+                  sizes="192px"
+                  className="object-contain object-left"
+                />
+              </div>
+
+              <p className="mt-4 text-xs leading-relaxed text-emerald-100/90">
+                O <strong>Saúde Master Centro Médico</strong> é o centro multidisciplinar de referência em Mateus Leme - MG. Cuidado humanizado, longevidade ativa e dedicação plena à sua saúde e da sua família.
+              </p>
+
+              <p className="mt-3 text-xs italic text-emerald-300 font-medium">
+                "Envelhecer bem é viver com autonomia."
+              </p>
+
+              {/* Social Media Links */}
+              <div className="mt-5 flex items-center gap-3">
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white hover:bg-white hover:text-[#052e16] transition-colors"
+                  aria-label="Instagram do Saúde Master"
+                >
+                  <InstagramIcon size={18} />
+                </a>
+
+                <a
+                  href={getWhatsAppUrl("Olá! Gostaria de conversar com a equipe do Saúde Master.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white hover:bg-[#25D366] hover:text-white transition-colors"
+                  aria-label="WhatsApp do Saúde Master"
+                >
+                  <WhatsAppIcon size={18} />
+                </a>
+              </div>
+            </div>
+
+            {/* Specialties Links Column */}
+            <div className="lg:col-span-4">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                Especialidades Atendidas
+              </h3>
+              <ul className="mt-4 grid grid-cols-2 gap-2 text-xs text-emerald-100/80">
+                <li>• Geriatria &amp; Longevidade</li>
+                <li>• Clínica Médica Geral</li>
+                <li>• Cardiologia &amp; ECG</li>
+                <li>• Ortopedia &amp; Traumatologia</li>
+                <li>• Ginecologia &amp; Obstetrícia</li>
+                <li>• Pediatria</li>
+                <li>• Oftalmologia</li>
+                <li>• Dermatologia</li>
+                <li>• Neurologia</li>
+                <li>• Psiquiatria &amp; Psicologia</li>
+                <li>• Endocrinologia</li>
+                <li>• Urologia</li>
+              </ul>
+            </div>
+
+            {/* Contact & Hours Column */}
+            <div className="lg:col-span-4">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                Atendimento &amp; Endereço
+              </h3>
+              <ul className="mt-4 space-y-2 text-xs text-emerald-100/90">
+                <li className="flex items-start gap-2">
+                  <MapPin className="h-4 w-4 text-emerald-300 shrink-0 mt-0.5" />
+                  <span>Dr. Tomás de Andrade, 686 - Centro, Mateus Leme - MG</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-emerald-300 shrink-0" />
+                  <span>Seg a Sex: 07h30 às 18h | Sáb: 08h às 12h</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <WhatsAppIcon size={16} className="text-emerald-300 shrink-0" />
+                  <span>WhatsApp: (31) 9 9619-6155 · (31) 9 9992-2456</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Phone className="h-4 w-4 text-emerald-300 shrink-0" />
+                  <span>Telefone Fixo: (31) 3535-2459</span>
+                </li>
+              </ul>
+
+              <div className="mt-5">
+                <GlowingButton
+                  href={getWhatsAppUrl("Olá! Gostaria de agendar pelo site.")}
+                  target="_blank"
+                  size="sm"
+                  variant="whatsapp"
+                  className="w-full text-center"
+                >
+                  <WhatsAppIcon size={14} />
+                  <span>Falar com Atendimento</span>
+                </GlowingButton>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 border-t border-emerald-900/60 pt-6 text-center text-[11px] text-emerald-200/80">
             <p>
-              © {new Date().getFullYear()} {CLINIC_NAME}. Todos os direitos reservados.
+              © {new Date().getFullYear()} Saúde Master Centro Médico — Todos os direitos reservados.
             </p>
-            <p className="mt-2 sm:mt-0">
-              Clínica de cardiologia e exames diagnósticos em Mateus Leme / MG.
+            <p className="mt-1">
+              Rua Dr. Tomás de Andrade, 686 · Centro · Mateus Leme / MG · CEP 35670-000.
             </p>
           </div>
         </div>
       </footer>
 
-      {/* 13. FLOATING WHATSAPP CTA BUTTON */}
-      <aside aria-label="Atendimento rápido no WhatsApp" className="fixed bottom-5 right-5 z-50">
+      {/* 14. FLOATING WHATSAPP BUTTON (CONVERSÃO EM QUALQUER PONTO DA PÁGINA) */}
+      <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
         <a
-          href={getWhatsAppUrl("Olá! Gostaria de agendar uma consulta / exame no Núcleo Cardiológico Integrado.")}
+          href={getWhatsAppUrl("Olá! Estou no site da Saúde Master e gostaria de agendar uma consulta.")}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-2.5 rounded-full bg-[#25D366] px-4 py-3 text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-[#20ba5a] pulse-whatsapp"
-          aria-label="Abrir WhatsApp para agendar consulta cardiológica"
+          className="group flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#1eb858] via-[#25D366] to-[#128C7E] px-4 py-3 text-white font-extrabold shadow-xl hover:scale-105 transition-all pulse-whatsapp"
+          aria-label="Abrir conversa no WhatsApp"
         >
-          <WhatsAppIcon size={24} className="text-white" />
-          <span className="hidden sm:inline font-bold text-xs tracking-wide uppercase">
+          <WhatsAppIcon size={22} />
+          <span className="hidden sm:inline text-xs tracking-wide">
             Agendar Consulta
           </span>
         </a>
-      </aside>
-
-      {/* 14. MODAL INTERATIVO DE AGENDAMENTO RÁPIDO */}
-      <AnimatePresence>
-        {modalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setModalOpen(false)}
-              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
-            />
-
-            {/* Modal Dialog */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 16 }}
-              className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xl z-10"
-            >
-              <button
-                type="button"
-                onClick={() => setModalOpen(false)}
-                className="absolute top-5 right-5 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200"
-                aria-label="Fechar janela"
-              >
-                <X className="h-4 w-4" />
-              </button>
-
-              <div className="space-y-2 mb-6">
-                <span className="eyebrow-red">Agendamento de Consulta ou Exame</span>
-                <h3 className="font-heading text-2xl font-bold text-slate-900">
-                  Como podemos cuidar de você hoje?
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600">
-                  Selecione o exame ou tipo de consulta desejada para ser atendido(a) pela nossa recepção no WhatsApp.
-                </p>
-              </div>
-
-              <div className="space-y-2.5 mb-6 max-h-60 overflow-y-auto pr-1">
-                {[
-                  "Consulta Cardiológica Geral (Dr. Cleiterson)",
-                  "Holter 24 Horas Digital",
-                  "M.A.P.A. 24 Horas (Pressão Arterial)",
-                  "Eletrocardiograma (ECG)",
-                  "Ecocardiograma Transtorácico com Doppler",
-                  "Avaliação de Risco Cirúrgico Pré-operatório",
-                  "Check-up Cardiológico Preventivo",
-                  "Acompanhamento de Hipertensão Arterial",
-                ].map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setModalSpecialty(item)}
-                    className={`flex w-full items-center justify-between rounded-xl border p-3 text-left text-xs font-semibold transition-all ${
-                      modalSpecialty === item
-                        ? "border-[#dd0101] bg-red-50 text-[#b91c1c]"
-                        : "border-slate-200 text-slate-700 hover:bg-slate-50"
-                    }`}
-                  >
-                    <span>{item}</span>
-                    {modalSpecialty === item && (
-                      <CheckCircle2 className="h-4 w-4 text-[#dd0101]" />
-                    )}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex flex-col gap-2.5">
-                <a
-                  href={getWhatsAppUrl(
-                    `Olá! Gostaria de agendar ${modalSpecialty} no Núcleo Cardiológico Integrado em Mateus Leme.`
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3.5 text-xs font-bold text-white uppercase tracking-wider hover:bg-[#20ba5a] transition-colors shadow-md"
-                >
-                  <WhatsAppIcon size={18} />
-                  <span>Continuar no WhatsApp</span>
-                </a>
-
-                <button
-                  type="button"
-                  onClick={() => setModalOpen(false)}
-                  className="py-2 text-xs font-semibold text-slate-500 hover:text-slate-800"
-                >
-                  Fechar janela
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+      </div>
     </div>
   );
 }

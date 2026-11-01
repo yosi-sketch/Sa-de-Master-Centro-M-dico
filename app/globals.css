@@ -3,71 +3,53 @@
 :root {
   color-scheme: light;
 
-  /* Primary Medical Blue Palette (Extracted directly from 'NÚCLEO' in Logo) */
-  --color-nucleo-blue: #01499a;
-  --color-nucleo-blue-dark: #013b7e;
-  --color-nucleo-blue-navy: #071d3d;
-  --color-nucleo-blue-light: #0260cc;
-  --color-nucleo-blue-cyan: #0284c7;
-  --color-nucleo-blue-soft: #e0f0fe;
-  --color-nucleo-blue-ice: #f0f7ff;
+  /* Primary Medical Green Palette (Extracted directly from 'Saúde Master' Logo & Campaign) */
+  --color-master-green: #16a34a;
+  --color-master-green-dark: #15803d;
+  --color-master-green-deep: #166534;
+  --color-master-green-forest: #14532d;
+  --color-master-green-night: #052e16;
+  --color-master-green-light: #22c55e;
+  --color-master-green-vibrant: #4ade80;
+  --color-master-green-soft: #dcfce7;
+  --color-master-green-ice: #f0fdf4;
+  --color-master-green-mint: #e8f5e9;
 
-  /* Cardiology Life & Heart Vitality Palette (Extracted directly from Heart in Logo) */
-  --color-nucleo-red: #dd0101;
-  --color-nucleo-red-dark: #b91c1c;
-  --color-nucleo-red-deep: #991b1b;
-  --color-nucleo-red-light: #ef4444;
-  --color-nucleo-red-soft: #fee2e2;
-  --color-nucleo-red-ice: #fef2f2;
+  /* Medical Charcoal & Dark Graphite (From 'aúde' and 'aster' in Logo) */
+  --color-master-charcoal: #33373d;
+  --color-master-charcoal-dark: #1e293b;
+  --color-master-charcoal-deep: #0f172a;
+  --color-master-charcoal-light: #475569;
+  --color-master-charcoal-muted: #64748b;
 
-  /* Diagnostic ECG Metallic Gray & Slate (From ECG trace in Logo) */
-  --color-nucleo-gray: #706f6f;
-  --color-nucleo-gray-light: #94a3b8;
-  --color-nucleo-gray-dark: #334155;
-
-  /* Warm Reception & Clinic Interior Accent */
-  --color-nucleo-wood: #b8874d;
-  --color-nucleo-wood-soft: #fdfbf7;
-  --color-nucleo-wood-border: #e8dfc8;
+  /* WhatsApp Conversion CTA */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1eb858;
 
   /* Neutral Hospital Clean Base */
   --color-white: #ffffff;
   --color-surface-clean: #f8fafc;
   --color-surface-soft: #f1f5f9;
-  --color-slate-text: #0f172a;
-  --color-slate-muted: #64748b;
   --color-border-clean: #e2e8f0;
+  --color-border-green: #bbf7d0;
 }
 
 @theme inline {
   --font-sans: var(--font-body), "Plus Jakarta Sans", system-ui, sans-serif;
   --font-heading: var(--font-heading), "Outfit", "Plus Jakarta Sans", sans-serif;
 
-  --color-nucleo-blue: #01499a;
-  --color-nucleo-blue-50: #f0f7ff;
-  --color-nucleo-blue-100: #e0f0fe;
-  --color-nucleo-blue-200: #bae6fd;
-  --color-nucleo-blue-300: #7dd3fc;
-  --color-nucleo-blue-400: #38bdf8;
-  --color-nucleo-blue-500: #0284c7;
-  --color-nucleo-blue-600: #0260cc;
-  --color-nucleo-blue-700: #01499a;
-  --color-nucleo-blue-800: #013b7e;
-  --color-nucleo-blue-900: #0c2b57;
-  --color-nucleo-blue-950: #071d3d;
-
-  --color-nucleo-red: #dd0101;
-  --color-nucleo-red-50: #fef2f2;
-  --color-nucleo-red-100: #fee2e2;
-  --color-nucleo-red-200: #fecaca;
-  --color-nucleo-red-300: #fca5a5;
-  --color-nucleo-red-400: #f87171;
-  --color-nucleo-red-500: #ef4444;
-  --color-nucleo-red-600: #dc2626;
-  --color-nucleo-red-700: #b91c1c;
-  --color-nucleo-red-800: #991b1b;
-  --color-nucleo-red-900: #7f1d1d;
-  --color-nucleo-red-950: #450a0a;
+  --color-master-green: #16a34a;
+  --color-master-green-50: #f0fdf4;
+  --color-master-green-100: #dcfce7;
+  --color-master-green-200: #bbf7d0;
+  --color-master-green-300: #86efac;
+  --color-master-green-400: #4ade80;
+  --color-master-green-500: #22c55e;
+  --color-master-green-600: #16a34a;
+  --color-master-green-700: #15803d;
+  --color-master-green-800: #166534;
+  --color-master-green-900: #14532d;
+  --color-master-green-950: #052e16;
 }
 
 html {
@@ -80,12 +62,12 @@ body {
   background: #ffffff;
   color: #0f172a;
   font-family: var(--font-body), "Plus Jakarta Sans", system-ui, sans-serif;
-  caret-color: #01499a;
+  caret-color: #16a34a;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: #01499a;
+  background: #15803d;
   color: #ffffff;
 }
 
@@ -94,8 +76,7 @@ body {
 }
 
 /* Eyebrows for medical badges */
-.eyebrow-blue,
-.eyebrow-red,
+.eyebrow-green,
 .eyebrow-dark {
   display: inline-flex;
   align-items: center;
@@ -107,20 +88,15 @@ body {
   text-transform: uppercase;
 }
 
-.eyebrow-blue {
-  color: #01499a;
-}
-
-.eyebrow-red {
-  color: #b91c1c;
+.eyebrow-green {
+  color: #15803d;
 }
 
 .eyebrow-dark {
-  color: #071d3d;
+  color: #052e16;
 }
 
-.eyebrow-blue::before,
-.eyebrow-red::before,
+.eyebrow-green::before,
 .eyebrow-dark::before {
   width: 1.25rem;
   height: 2px;
@@ -141,11 +117,11 @@ body {
 }
 
 .nav-link:hover {
-  color: #01499a;
+  color: #15803d;
 }
 
 .nav-link.active {
-  color: #01499a;
+  color: #15803d;
   font-weight: 700;
 }
 
@@ -156,7 +132,7 @@ body {
   left: 0;
   width: 0%;
   height: 2px;
-  background-color: #01499a;
+  background-color: #15803d;
   transition: width 0.2s ease-in-out;
   border-radius: 9999px;
 }
@@ -166,34 +142,20 @@ body {
   width: 100%;
 }
 
-/* Heartbeat pulse animation for cardiology CTA */
+/* Heartbeat pulse animation for medical badge */
 @keyframes heart-pulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(221, 1, 1, 0.4);
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4);
   }
   50% {
     transform: scale(1.02);
-    box-shadow: 0 0 0 10px rgba(221, 1, 1, 0);
-  }
-}
-
-.pulse-cardio {
-  animation: heart-pulse 2.8s infinite;
-}
-
-/* Subtle glow animations for high-converting elements */
-@keyframes subtle-pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(1, 73, 154, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(1, 73, 154, 0);
+    box-shadow: 0 0 0 10px rgba(22, 163, 74, 0);
   }
 }
 
 .pulse-medical {
-  animation: subtle-pulse 3s infinite;
+  animation: heart-pulse 2.8s infinite;
 }
 
 @keyframes green-pulse {
